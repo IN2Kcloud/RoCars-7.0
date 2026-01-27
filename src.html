@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>RoCars</title>
+	<meta name="description" content="cars." />
+	<meta name="keywords" content="cars, road, highway, lights, speed" />
+	<meta name="author" content="EL-KABOOS" />
+	<link rel="shortcut icon" href="./assets/RoCars.png">
+	<link rel="stylesheet" href="base.css">
+  <!-- Ionicons -->
+  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.js"></script>
+</head>
+<body class="before-load">
+    <div class="loading">
+      <div class="loading-circle">
+        <img src="assets/RoCarsTXT.gif" alt="Loading">
+      </div>
+    </div>
+
+    <div id="blob"></div> 
+    <div id="blur"></div>
+    
+    <span class="bbg"></span>
+    
+    <div class="tv-wrapper menu-toggle-btn">
+      <div id="window" class="tv-window hover-zone">
+        <div class="vhs-effect">
+          <img class="RCLOGO" src="./assets/RoCarsW.svg" alt="Logo">
+          <img class="RCTXT" src="./assets/RoCarsTXT.svg" alt="Logo">
+          <!--<div id="window-text">RoCars</div>-->
+          <div class="vhs-scanlines"></div>
+          <div class="tv-static"></div>
+        </div>
+      </div>
+    </div>
+    <!--CIRCLES-->
+    <div class="pulse-circles">
+      <span class="circle"></span>
+      <span class="circle"></span>
+      <span class="circle"></span>
+    </div>
+
+    <div class="menu-overlay">
+      <div class="menu-bg"></div>
+      <div id="menublur"></div>
+      <div class="menu-overlay-nav">
+        <div class="close-btn">
+          <div class="close-btn-bar"></div>
+          <div class="close-btn-bar"></div>
+        </div>
+        <div class="menu-overlay-items">
+          <a href="https://www.youtube.com/@RoCarsTV" target="_blank"><ion-icon name="logo-youtube"></ion-icon></a>
+          <a href="https://www.instagram.com/rocarstv" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
+          <a href="https://www.tiktok.com/@b.rocars" target="_blank"><ion-icon name="logo-tiktok"></ion-icon></a>
+        </div>
+      </div>
+
+      <div class="menu-overlay-footer">
+        <p>ROCARS &copy; 2025 All Rights Reserved</p>
+        <div class="menu-overlay-items">
+          <a href="#"><span class="menubg"></span>Cookie Settings</a>
+          <a href="#"><span class="menubg"></span>Privay Policy</a>
+          <a href="#"><span class="menubg"></span>Legal Disclaimer</a>
+        </div>
+      </div>
+
+      <div class="circular-menu">
+        <div class="joystick">
+          <img src="./public/RoCarsB.png" class="center-icon center-main" alt="RoCars">
+          <ion-icon name="chevron-up-sharp" class="center-icon center-up"></ion-icon>
+          <ion-icon name="chevron-down-sharp" class="center-icon center-down"></ion-icon>
+          <ion-icon name="chevron-back-sharp" class="center-icon center-left"></ion-icon>
+          <ion-icon name="chevron-forward-sharp" class="center-icon center-right"></ion-icon>
+        </div>
+      </div>
+      
+    </div>
+ 
+    <div class="absolute">
+			<div class="absolute inset-0 jc">
+			  <div class="bg-shape1 bg-pr o50 bg-blur"></div>
+			  <div class="bg-shape2 bg-gd o50 bg-blur"></div>
+			  <div class="bg-shape1 bg-rd o50 bg-blur"></div>
+			</div>
+		</div>
+
+    
+	  <div class="logo-glitch-wrapper">
+      <img src="./assets/RoCarsO.svg" class="logo-base" alt="Logo">
+      <!--<img src="./assets/RCMRQW.png" class="logo-base MQB" alt="Logo">-->
+    </div>
+    
+
+    <div class="marqueecontainer fade-sides">
+      <div class="marqueecontent">
+        <span>•</span>
+        <span class="RC">RoCars</span>
+        <span>•</span>
+        <span>where horsepower meets cinematic excellence</span>
+        <span>•</span>
+        <span class="RC">RoCars</span>
+        <span>•</span>
+        <span>supercars, classic legends & luxury automotive brands</span>
+        <span>•</span>
+        <span class="RC">RoCars</span>
+        <span>•</span>
+        <span>where horsepower meets cinematic excellence</span>
+        <span>•</span>
+        <span class="RC">RoCars</span>
+        <span>•</span>
+        <span>supercars, classic legends & luxury automotive brands</span>
+      </div>
+    </div>
+
+    <div class="we"> 
+      <div class="marqueecontainerII fade-sides">
+        <div class="marqueecontentII">
+          <span>RoCars&nbsp;</span>
+          <span>Roman With Cars&nbsp;</span>
+          <span>RoCars&nbsp;</span>
+          <span>Roman With Cars&nbsp;</span>
+          <span>RoCars&nbsp;</span>
+          <span>Roman With Cars&nbsp;</span>
+          <span>RoCars&nbsp;</span>
+          <span>Roman With Cars&nbsp;</span>
+        </div>
+      </div>
+      <p class="subhdrII fade-in-out">Dive IN !</p> 
+      <span class="hdr">RoCars</span> 
+      <span class="subhdr">RoCars<br><span>&nbsp;ROMAN WITH CARS</span></span>
+      <img class="hdrII" src="./assets/RoCarsW.png"></img>
+    </div>
+
+    <svg style="display: none;">
+      <defs>
+        <filter id="glitch-filter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.00001" numOctaves="1" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
+
+    <div class="video-glitch-wrapper fade-center">
+      <video src="assets/videoplaybackII.mp4" autoplay loop muted></video>
+    </div>
+   
+  <svg class="max-txt" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <filter id="HoverDistort">
+        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" stitchTiles="stitch" result="turb">
+          <animate attributeName="seed" from="2" to="50" dur="5s" repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="turb" scale="10" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="HoverDistort-max">
+        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" stitchTiles="stitch" result="turb">
+          <animate attributeName="seed" from="2" to="50" dur="5s" repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="turb" scale="33" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <svg id="filters" style="display: none;">
+    <filter id="text-distortion" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence 
+          id="text-turbulence" 
+          type="fractalNoise" 
+          baseFrequency="0.01 0.05" 
+          numOctaves="1" 
+          seed="1" />
+      <feDisplacementMap 
+          in="SourceGraphic" 
+          scale="30" />
+    </filter>
+  </svg>
+  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script type="module" src="main.js" defer></script>
+  <script src="./menu.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" integrity="sha512-u3fPA7V8qQmhBPNT5quvaXVa1mnnLSXUep5PS1qo5NRzHwG19aHmNJnj1Q8hpA/nBWZtZD4r4AX6YOt5ynLN2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/script.js"></script>
+  <script src="js/index.cad48f07.js"></script>
+
+  <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <script>
+    function magneticEffect(element, strength = 40, easing = 0.15, invert = false) {
+        let mouseX = 0, mouseY = 0;
+        let targetX = 0, targetY = 0;
+    
+        const parent = element.closest(".logo");
+    
+        // save the base transform from CSS
+        const baseTransform = window.getComputedStyle(element).transform === "none" 
+            ? "" 
+            : window.getComputedStyle(element).transform;
+    
+        parent.addEventListener("mousemove", e => {
+            const rect = parent.getBoundingClientRect();
+            const relX = e.clientX - (rect.left + rect.width / 2);
+            const relY = e.clientY - (rect.top + rect.height / 2);
+    
+            targetX = (relX / rect.width) * strength * (invert ? -1 : 1);
+            targetY = (relY / rect.height) * strength * (invert ? -1 : 1);
+        });
+    
+        parent.addEventListener("mouseleave", () => {
+            targetX = 0;
+            targetY = 0;
+        });
+    
+        function animate() {
+            mouseX += (targetX - mouseX) * easing;
+            mouseY += (targetY - mouseY) * easing;
+    
+            // Apply GSAP offsets **in addition to** the original CSS transform
+            gsap.set(element, {
+                transform: `${baseTransform} translate(${mouseX}px, ${mouseY}px)`
+            });
+    
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
+    
+    // Apply separately
+    magneticEffect(document.querySelector(".logo img"), 35, 0.15);       // img with base centering + rotation
+    magneticEffect(document.querySelector(".logo a"), 20, 0.12, true);   // text opposite movement
+  </script>
+
+    <!-- GLITCH TEXT SWITCH -->
+    <script type="module">
+      import gsap from "https://cdn.skypack.dev/gsap";
+      
+      const morphText = document.getElementById("morph-text");
+      const words = ["RoCars", "Motors", "Turbos", "Drifts"];
+      let index = 0;
+      
+      function slowGlitchSwap() {
+        // subtle fade out
+        gsap.to(morphText, {
+          duration: 0.2,
+          opacity: 0,
+          ease: "power1.inOut",
+          onComplete: () => {
+            index = (index + 1) % words.length;
+            morphText.textContent = words[index];
+            // fade in
+            gsap.to(morphText, {
+              duration: 0.2,
+              opacity: 1,
+              ease: "power1.inOut"
+            });
+          }
+        });
+      }
+      
+      // slower swap every 4 seconds
+      setInterval(slowGlitchSwap, 4000);
+    </script>
+    <!-- ROTATION LOGIC KEPT -->
+    <script>
+      const spin = gsap.to(".VMcen", {
+        rotation: -360,
+        repeat: -1,
+        ease: "none",
+        duration: 20,
+        transformOrigin: "50% 50%",
+      });
+
+      document.querySelector(".skullcen").addEventListener("mouseenter", () => {
+        gsap.to(spin, { timeScale: 5, duration: 1, ease: "power2.out" });
+      });
+
+      document.querySelector(".skullcen").addEventListener("mouseleave", () => {
+        gsap.to(spin, { timeScale: 1, duration: 1.2, ease: "power2.inOut" });
+      });
+    </script>
+
+    <!-- MARQUEE B ROTATION LOGIC 
+    <script>
+      const spina = gsap.to(".MQB", {
+        rotation: -360,
+        repeat: -1,
+        ease: "none",
+        duration: 20,
+        transformOrigin: "50% 50%",
+      });
+
+      document.querySelector(".logo-glitch-wrapper").addEventListener("mouseenter", () => {
+        gsap.to(spina, { timeScale: 3, duration: 1, ease: "power2.out" });
+      });
+
+      document.querySelector(".logo-glitch-wrapper").addEventListener("mouseleave", () => {
+        gsap.to(spina, { timeScale: 1, duration: 1.2, ease: "power2.inOut" });
+      });
+    </script>
+  -->
+  <script>
+    function lockViewport() {
+      // Reset scroll position
+      window.scrollTo(0, 0);
+    
+      // Force body to exactly match viewport size
+      document.body.style.position = 'fixed';
+      document.body.style.top = '0';
+      document.body.style.left = '0';
+      document.body.style.width = window.innerWidth + 'px';
+      document.body.style.height = window.innerHeight + 'px';
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.documentElement.style.width = '100%';
+      document.documentElement.style.height = '100%';
+    }
+    
+    // Apply immediately and on resize
+    lockViewport();
+    window.addEventListener('resize', lockViewport);
+  </script>
+
+  
+</body>
+</html>

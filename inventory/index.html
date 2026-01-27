@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory | RoCars</title>
+    <meta name="keywords" content="cars, road, highway, lights, speed" />
+	  <meta name="author" content="EL-KABOOS" />
+	  <link rel="shortcut icon" href="../assets/RoCars.png">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="blurry-prev">
+        <img src="./assets/img1.jpeg" alt="" />
+        <div class="overlay"></div>
+      </div>
+
+      <div class="col site-info">
+        <nav>
+          <a href="#"><span class="menu-bg"></span>Home</a>
+          <a href="#"><span class="menu-bg"></span>Contact</a>
+        </nav>
+        <div class="header">
+          <h1> <span class="subhdr">Welcome to</span> <br> <span class="brt hdr">RoCars</span></h1> <br>
+          <div class="types">
+            <ul class="types-list fade-sides">
+              <li class="fade-sides" data-phrases="Explore the latest arrivals in our showroom. From cutting-edge performance to elegant comfort, each vehicle is hand-selected for connoisseurs who demand the extraordinary.">• Latest Arrivals •</li>
+              <li class="fade-sides" data-phrases="Unleash adrenaline with our high-performance lineup. These vehicles are engineered for thrill-seekers, delivering power, precision, and unmatched driving dynamics.">• Performance Cars •</li>
+              <li class="fade-sides" data-phrases="Indulge in refined luxury with our selection of premium sedans. Crafted for comfort and prestige, these cars redefine everyday driving with executive style and substance.">• Luxury Sedans •</li>
+              <li class="fade-sides" data-phrases="Discover a world of rare and exotic supercars. Featuring limited-production marvels from the world’s elite manufacturers, our collection is for those who settle for nothing less than legendary.">• Exotic Supercars •</li>
+              <li class="fade-sides" data-phrases="Step into the future with our elite electric vehicle range. These luxury EVs combine sustainability with speed, style, and cutting-edge technology for a smarter drive.">• Electric Vehicles •</li>
+              <li class="fade-sides" data-phrases="Looking for something truly one-of-a-kind? Our custom order service allows you to build your dream car — tailored to your exact preferences in design, performance, and technology.">• Custom Orders •</li>
+              <li class="fade-sides" data-phrases="Own excellence for less with our certified pre-owned collection. Each vehicle undergoes a rigorous inspection process, ensuring quality, performance, and peace of mind.">• Certified Pre-Owned •</li>
+              <li class="fade-sides" data-phrases="Enjoy a white-glove experience with our concierge services. From private test drives to international delivery, we handle every detail so you can focus on the drive.">• Concierge Services •</li>
+            </ul>
+          </div>
+        </div>
+        <div class="copy">
+          <p>
+            Explore our handpicked collection of the finest luxury vehicles, blending innovation, performance, and unmatched elegance.
+          </p>
+        </div>
+      </div>
+
+      
+      <div class="col project-preview">
+        <div class="project-details">
+          <div class="title"><h1>Tesla Cybertruck Elongation EVO</h1></div>
+          <div class="car-year">
+            <p>Year: 2024</p>
+          </div>
+          <div class="car-price">
+            <p>$: Pricing available upon request.</p>
+          </div>
+          <div class="car-specs">
+            <p>
+              European | 15.500 km 857 hp<br>  
+              0-100 km/h in 4,1 s • Top Speed: 180 km/h<br>
+              (with rollout subtracted)
+            </p>
+          </div>
+          <div class="car-services">
+            <p>
+              • Fast purchase/sale with VIP RTA<br> 
+              • Available payment plan<br>
+              • Help with car insurance
+            </p>
+          </div>
+          <div class="car-highlight">
+            <p>variant—tri-motor AWD with Ultra-rugged and built for domination.</p>
+          </div>
+        </div>
+
+        <div class="project-img">
+          <img src="./assets/img1.jpeg" alt="" />
+          <a class="open-gallery" target="_blank">View Full Gallery</a>
+        </div>
+
+      </div>
+
+      <div class="gallery-wrapper">
+        <div class="gallery"></div>
+      </div>
+    </div>
+
+    <svg class="max-txt" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <filter id="HoverDistort">
+          <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" stitchTiles="stitch" result="turb">
+            <animate attributeName="seed" from="2" to="50" dur="5s" repeatCount="indefinite" />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="turb" scale="10" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <filter id="HoverDistort-max">
+          <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" stitchTiles="stitch" result="turb">
+            <animate attributeName="seed" from="2" to="50" dur="5s" repeatCount="indefinite" />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="turb" scale="33" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
+    
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
