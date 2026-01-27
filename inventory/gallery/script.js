@@ -1,3 +1,11 @@
+window.addEventListener('load', () => {
+  document.body.classList.remove('before-load');
+});
+
+document.querySelector('.loading').addEventListener('transitionend', (e) => {
+  document.body.removeChild(e.currentTarget);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const sliderList = document.querySelector('[data-slider="list"]');
   const slides = gsap.utils.toArray('[data-slider="slide"]');
