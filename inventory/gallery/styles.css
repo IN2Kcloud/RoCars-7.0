@@ -261,7 +261,7 @@ html:not(.wf-design-mode) .slide-caption{ opacity: 0; transform:translate(-25%, 
 html:not(.wf-design-mode) [data-slider="slide"].active .slide-caption{ opacity: 1; transform:translate(0%, 0px) }
 
 .osmo-credits {
-  z-index: 999;
+  z-index: 99;
   pointer-events: none;
   flex-flow: column;
   justify-content: center;
