@@ -202,7 +202,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .subhdr {/*font-size: 66px;*/ scale: .8;transform-origin: top left; /* Or 0% 0% */}
   /*.subhdr span {font-size: 20px; letter-spacing: 1px;}*/
   .we img {width: 20%;}
-  .we p {font-size: 20px; bottom: 22%;}
+  .we p {font-size: 20px; bottom: 25%;}
   .marquee-text {font-size: 3rem;}
 }
 
