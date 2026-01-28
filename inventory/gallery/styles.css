@@ -10,6 +10,7 @@ body {
   font-size: 1vw;
 }
 body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 100%;background-image: repeating-linear-gradient(transparent, transparent 2px, #aaa 3px);background-size: auto 100%;pointer-events: none;z-index: 0;opacity: .3; }
+@media(max-width: 1000px) {body::after {display: none;}}
 
 @font-face{font-family:'LEMONMILK-Regular';src:url('../../assets/LEMONMILK-Regular.otf') format('opentype');font-display:swap;}
 
