@@ -132,7 +132,7 @@ nav a:hover .menu-bg::before { transform: scaleX(1); transform-origin: center le
   .project-preview{ flex: 2.5;}
   .project-details{width:calc(100% - 1em);top:0em; left: .5em;padding: 0em;}
   .car-highlight,.car-year,.car-price,.car-specs,.car-services{margin-bottom:.1em;}
-  .project-img{width:93%; height: 33%; left: 0em;}
+  .project-img{width:93%; height: 33%; left: 1em;}
 
   .gallery-wrapper{flex: 1; border-right:none;border-top:1px solid rgba(255,255,255,.1);}
   .gallery{width:300vw;height:100px;flex-direction:row;}
