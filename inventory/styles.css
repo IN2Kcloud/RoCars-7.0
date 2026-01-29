@@ -31,8 +31,6 @@ nav a:hover .menu-bg::before { transform: scaleX(1); transform-origin: center le
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-.types-list {
   list-style: none;
   margin: 0.5rem 0 1.2rem;
   padding-left: 0;
@@ -53,6 +51,8 @@ nav a:hover .menu-bg::before { transform: scaleX(1); transform-origin: center le
   background: transparent;
   transition: all 0.4s ease;
   padding: 0.2em 0;
+  -webkit-tap-highlight-color: transparent; /* Removes the blue box on tap */
+  user-select: none; -webkit-user-select: none;/* Safari */ -moz-user-select: none;/* Firefox */ -ms-user-select: none;/* IE/Edge */
 }
 .types-list li .marquee-inner {
   display: inline-block;
