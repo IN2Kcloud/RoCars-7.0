@@ -112,8 +112,8 @@ nav a:hover .menu-bg::before { transform: scaleX(1); transform-origin: center le
 }
 
 @media (max-width:1080px){
-  h1 {font-size: 20px;}
-  a,p {font-size: 14px;}
+  h1 {font-size: 22px;}
+  a,p {font-size: 16px;}
 
   .project-details{top:2em;}
   .car-highlight,.car-year,.car-price,.car-specs,.car-services{margin-bottom:.2em;}
@@ -125,14 +125,14 @@ nav a:hover .menu-bg::before { transform: scaleX(1); transform-origin: center le
   .container{flex-direction:column;}
   .site-info{flex: 0;border-left:none;border-bottom:1px solid rgba(255,255,255,.1);}
   .header{display: none;}
-  h1 {font-size: 25px;}
-  a,p {font-size: 18px;}
+  h1 {font-size: 20px;}
+  a,p {font-size: 16px;}
   .site-info .copy{display:none;}
-
+  .title h1{font-size: 20px;}
   .project-preview{ flex: 2.5;}
   .project-details{width:calc(100% - 1em);top:0em; left: .5em;padding: 0em;}
-  .car-highlight,.car-year,.car-price,.car-specs,.car-services{margin-bottom:.2em;}
-  .project-img{width:93%; height: 33%;}
+  .car-highlight,.car-year,.car-price,.car-specs,.car-services{margin-bottom:.1em;}
+  .project-img{width:93%; height: 33%; left: 0em;}
 
   .gallery-wrapper{flex: 1; border-right:none;border-top:1px solid rgba(255,255,255,.1);}
   .gallery{width:300vw;height:100px;flex-direction:row;}
