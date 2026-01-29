@@ -1,4 +1,15 @@
-// GSAP is now global (because we used the CDN)
+// 1. Audio Pooling: Preload sounds to prevent lag on live servers
+const audioSelect = new Audio("./public/menu-select.mp3");
+const audioOpen = new Audio("./public/menu-open.mp3");
+const audioClose = new Audio("./public/menu-close.mp3");
+
+// Optimization: Play sound from memory instantly
+function playSound(audio) {
+  audio.pause();
+  audio.currentTime = 0;
+  audio.play().catch(() => {}); 
+}
+
 const menuItems = [
   { label: "Portfolio", href: "./cars/index.html" },
   { label: "Inventory", href: "./inventory/index.html" },
@@ -15,7 +26,6 @@ function getResponsiveConfig() {
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
   const isMobile = viewportWidth < 1000;
-
   const maxSize = Math.min(viewportWidth * 0.9, viewportHeight * 0.9);
   const menuSize = isMobile ? Math.min(maxSize, 480) : 700;
 
@@ -30,7 +40,6 @@ function getResponsiveConfig() {
 
 document.addEventListener("DOMContentLoaded", () => {
   responsiveConfig = getResponsiveConfig();
-
   const menu = document.querySelector(".circular-menu");
   const joystick = document.querySelector(".joystick");
   const menuOverlayNav = document.querySelector(".menu-overlay-nav");
@@ -44,11 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   menuItems.forEach((item, index) => {
     const segment = createSegment(item, index, menuItems.length);
-    segment.addEventListener("mouseenter", () => {
-      if (isOpen) {
-        new Audio("./public/menu-select.mp3").play().catch(() => {});
-      }
-    });
     menu.appendChild(segment);
   });
 
@@ -70,28 +74,32 @@ function createSegment(item, index, total) {
   const startAngle = baseStartAngle + 1;
   const endAngle = baseStartAngle + anglePerSegment - 0;
 
-  const innerStartX = center + innerRadius * Math.cos(((startAngle - 90) * Math.PI) / 180);
-  const innerStartY = center + innerRadius * Math.sin(((startAngle - 90) * Math.PI) / 180);
-  const outerStartX = center + outerRadius * Math.cos(((startAngle - 90) * Math.PI) / 180);
-  const outerStartY = center + outerRadius * Math.sin(((startAngle - 90) * Math.PI) / 180);
-  const innerEndX = center + innerRadius * Math.cos(((endAngle - 90) * Math.PI) / 180);
-  const innerEndY = center + innerRadius * Math.sin(((endAngle - 90) * Math.PI) / 180);
-  const outerEndX = center + outerRadius * Math.cos(((endAngle - 90) * Math.PI) / 180);
-  const outerEndY = center + outerRadius * Math.sin(((endAngle - 90) * Math.PI) / 180);
+  const polarToCartesian = (angle, radius) => ({
+    x: center + radius * Math.cos(((angle - 90) * Math.PI) / 180),
+    y: center + radius * Math.sin(((angle - 90) * Math.PI) / 180)
+  });
+
+  const iStart = polarToCartesian(startAngle, innerRadius);
+  const oStart = polarToCartesian(startAngle, outerRadius);
+  const iEnd = polarToCartesian(endAngle, innerRadius);
+  const oEnd = polarToCartesian(endAngle, outerRadius);
 
   const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
-
-  const pathData = [`M ${innerStartX} ${innerStartY}`, `L ${outerStartX} ${outerStartY}`, `A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${outerEndX} ${outerEndY}`, `L ${innerEndX} ${innerEndY}`, `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${innerStartX} ${innerStartY}`, "Z"].join(" ");
+  const pathData = [
+    `M ${iStart.x} ${iStart.y}`, `L ${oStart.x} ${oStart.y}`,
+    `A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${oEnd.x} ${oEnd.y}`,
+    `L ${iEnd.x} ${iEnd.y}`,
+    `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${iStart.x} ${iStart.y}`, "Z"
+  ].join(" ");
 
   segment.style.clipPath = `path('${pathData}')`;
   segment.style.width = `${menuSize}px`;
   segment.style.height = `${menuSize}px`;
 
-  const contentX = center + contentRadius * Math.cos(((centerAngle - 90) * Math.PI) / 180);
-  const contentY = center + contentRadius * Math.sin(((centerAngle - 90) * Math.PI) / 180);
+  const contentPos = polarToCartesian(centerAngle, contentRadius);
 
   segment.innerHTML = `
-    <div class="segment-content" style="left: ${contentX}px; top: ${contentY}px; transform: translate(-50%, -50%);">
+    <div class="segment-content" style="left: ${contentPos.x}px; top: ${contentPos.y}px; transform: translate(-50%, -50%);">
       <div class="label">${item.label}</div>
       <div class="marquee-wrapper">
         <div class="marquee-content">
@@ -103,21 +111,19 @@ function createSegment(item, index, total) {
 
   const marqueeContent = segment.querySelector('.marquee-content');
   const scrollAnim = gsap.to(marqueeContent, {
-    xPercent: -33.33,
-    ease: "none",
-    duration: 6,
-    repeat: -1,
-    paused: true
+    xPercent: -33.33, ease: "none", duration: 6, repeat: -1, paused: true
   });
 
-  // Attach the animation to the element so initCenterDrag can find it
   segment.scrollAnim = scrollAnim;
 
-  // Keep mouse hover support just in case
   segment.addEventListener("mouseenter", () => {
-    segment.classList.add("active");
-    scrollAnim.play();
+    if (isOpen) {
+      playSound(audioSelect);
+      segment.classList.add("active");
+      scrollAnim.play();
+    }
   });
+
   segment.addEventListener("mouseleave", () => {
     segment.classList.remove("active");
     scrollAnim.pause();
@@ -129,159 +135,48 @@ function createSegment(item, index, total) {
 
 function toggleMenu() {
   if (isMenuAnimating) return;
-
   const menuOverlay = document.querySelector(".menu-overlay");
   const menuSegments = document.querySelectorAll(".menu-segment");
   const joystick = document.querySelector(".joystick");
   const menuContainer = document.querySelector(".circular-menu");
-  const menuOverlayNav = document.querySelector(".menu-overlay-nav");
-  const menuOverlayFooter = document.querySelector(".menu-overlay-footer");
+  const [nav, footer] = [document.querySelector(".menu-overlay-nav"), document.querySelector(".menu-overlay-footer")];
 
   isMenuAnimating = true;
 
   if (!isOpen) {
     isOpen = true;
-    new Audio("./public/menu-open.mp3").play().catch(() => {});
+    playSound(audioOpen);
+    gsap.to(menuOverlay, { opacity: 1, duration: 0.4, onStart: () => (menuOverlay.style.pointerEvents = "all") });
+    gsap.fromTo([nav, footer], { opacity: 0, y: (i) => i === 0 ? -20 : 20 }, { opacity: 1, y: 0, duration: 0.5 });
+    gsap.fromTo(menuContainer, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.2)" });
 
-    // 1. Background "Windshield" Dimming
-    gsap.to(menuOverlay, {
-      opacity: 1,
-      duration: 0.4,
-      ease: "power2.out",
-      onStart: () => (menuOverlay.style.pointerEvents = "all"),
+    menuSegments.forEach((seg, i) => {
+      gsap.set(seg, { opacity: 0, rotation: -20 });
+      gsap.to(seg, { opacity: 1, rotation: 0, duration: 0.4, delay: 0.15 + (i * 0.07), onComplete: () => { if (i === menuSegments.length - 1) isMenuAnimating = false; } });
     });
-
-    // 2. HUD Power-On (Nav & Footer)
-    // We use a flicker effect to mimic digital displays booting up
-    gsap.fromTo([menuOverlayNav, menuOverlayFooter], 
-      { opacity: 0, y: (i) => i === 0 ? -20 : 20 }, 
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.5, 
-        delay: 0.1, 
-        ease: "power3.out",
-        onStart: () => {
-          // Rapid glitch/flicker
-          gsap.to([menuOverlayNav, menuOverlayFooter], {
-            opacity: 0.4,
-            repeat: 5,
-            yoyo: true,
-            duration: 0.04,
-            onComplete: () => gsap.set([menuOverlayNav, menuOverlayFooter], { opacity: 1 })
-          });
-        }
-      }
-    );
-
-    // 3. Central Wheel "Ignition"
-    gsap.fromTo(menuContainer, 
-      { scale: 0.8, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.2)" }
-    );
-
-    // 4. Tachometer Sweep (Sequential segment reveal)
-    menuSegments.forEach((segment, index) => {
-      gsap.set(segment, { opacity: 0, rotation: -20, transformOrigin: "50% 50%" });
-      
-      gsap.to(segment, {
-        opacity: 1,
-        rotation: 0,
-        duration: 0.4,
-        delay: 0.15 + (index * 0.07), // Clockwise sweep
-        ease: "power4.out",
-        onComplete: () => {
-          if (index === menuSegments.length - 1) isMenuAnimating = false;
-        }
-      });
-    });
-
-    // 5. Joystick Engagement
-    gsap.to(joystick, {
-      scale: 1,
-      duration: 0.5,
-      delay: 0.4,
-      ease: "elastic.out(1, 0.75)",
-    });
-
+    gsap.to(joystick, { scale: 1, duration: 0.5, delay: 0.4, ease: "elastic.out(1, 0.75)" });
   } else {
-    // SHUTDOWN SEQUENCE
     isOpen = false;
-    new Audio("./public/menu-close.mp3").play().catch(() => {});
-
-    // Quick HUD fade out
-    gsap.to([menuOverlayNav, menuOverlayFooter], {
-      opacity: 0,
-      y: (i) => i === 0 ? -10 : 10,
-      duration: 0.2
-    });
-
-    // Reverse sweep collapse
-    gsap.to(menuSegments, {
-      opacity: 0,
-      scale: 0.9,
-      duration: 0.2,
-      stagger: 0.05,
-      ease: "power2.in",
-    });
-
-    // Fade out joystick and overlay
+    playSound(audioClose);
+    gsap.to([nav, footer], { opacity: 0, duration: 0.2 });
+    gsap.to(menuSegments, { opacity: 0, scale: 0.9, duration: 0.2, stagger: 0.05 });
     gsap.to(joystick, { scale: 0, duration: 0.2 });
-
-    gsap.to(menuOverlay, {
-      opacity: 0,
-      duration: 0.4,
-      delay: 0.3,
-      onComplete: () => {
-        menuOverlay.style.pointerEvents = "none";
-        isMenuAnimating = false;
-      },
-    });
+    gsap.to(menuOverlay, { opacity: 0, duration: 0.4, delay: 0.3, onComplete: () => { menuOverlay.style.pointerEvents = "none"; isMenuAnimating = false; } });
   }
 }
 
 function initCenterDrag() {
   const joystick = document.querySelector(".joystick");
-  let isDragging = false;
-  let currentX = 0;
-  let currentY = 0;
-  let targetX = 0;
-  let targetY = 0;
-  let activeSegment = null;
+  let isDragging = false, currentX = 0, currentY = 0, targetX = 0, targetY = 0, activeSegment = null;
 
   function deactivateSegment(segment) {
     if (!segment) return;
     segment.classList.remove("active");
     const content = segment.querySelector(".segment-content");
     gsap.killTweensOf([segment, content]);
-
-    gsap.to(segment, {
-      scale: 1,
-      filter: "brightness(1) blur(0px)",
-      duration: 0.3,
-      ease: "power2.out",
-      onComplete: () => {
-        segment.style.scale = "";
-        segment.style.filter = "";
-        segment.style.animation = "";
-        segment.style.zIndex = "";
-      }
-    });
-
-    gsap.to(content, {
-      scale: 1,
-      opacity: 1,
-      duration: 0.3,
-      onComplete: () => {
-        content.style.animation = "";
-        content.style.scale = "";
-      }
-    });
-
-    if (segment.scrollAnim) {
-      segment.scrollAnim.pause();
-      gsap.to(segment.querySelector('.marquee-content'), { xPercent: 0, duration: 0.3 });
-    }
+    gsap.to(segment, { scale: 1, filter: "brightness(1)", duration: 0.3, onComplete: () => { segment.style.scale = ""; segment.style.filter = ""; segment.style.animation = ""; segment.style.zIndex = ""; } });
+    gsap.to(content, { scale: 1, opacity: 1, duration: 0.3, onComplete: () => { content.style.animation = ""; } });
+    if (segment.scrollAnim) { segment.scrollAnim.pause(); gsap.to(segment.querySelector('.marquee-content'), { xPercent: 0, duration: 0.3 }); }
   }
 
   function animate() {
@@ -289,87 +184,61 @@ function initCenterDrag() {
     currentY += (targetY - currentY) * 0.15;
     gsap.set(joystick, { x: currentX, y: currentY });
 
-    if (isDragging && Math.sqrt(currentX * currentX + currentY * currentY) > 20) {
+    if (isDragging && Math.sqrt(currentX ** 2 + currentY ** 2) > 20) {
       const angle = Math.atan2(currentY, currentX) * (180 / Math.PI);
-      const segmentIndex = Math.floor(((angle + 90 + 360) % 360) / (360 / menuItems.length)) % menuItems.length;
-      const allSegments = document.querySelectorAll(".menu-segment");
-      const segment = allSegments[segmentIndex];
+      const idx = Math.floor(((angle + 90 + 360) % 360) / (360 / menuItems.length)) % menuItems.length;
+      const seg = document.querySelectorAll(".menu-segment")[idx];
 
-      if (segment !== activeSegment) {
+      if (seg !== activeSegment) {
         if (activeSegment) deactivateSegment(activeSegment);
-        activeSegment = segment;
-        segment.classList.add("active");
-        segment.style.zIndex = "10";
-        segment.style.animation = "flickerHover 350ms ease-in-out forwards";
-        segment.querySelector(".segment-content").style.animation = "contentFlickerHover 350ms ease-in-out forwards";
-        gsap.to(segment, { scale: 1.08, duration: 0.4, ease: "back.out(2)" });
-        if (segment.scrollAnim) segment.scrollAnim.play();
-        if (isOpen) new Audio("./public/menu-select.mp3").play().catch(() => {});
+        activeSegment = seg;
+        seg.classList.add("active");
+        seg.style.zIndex = "10";
+        seg.style.animation = "flickerHover 350ms ease-in-out forwards";
+        seg.querySelector(".segment-content").style.animation = "contentFlickerHover 350ms ease-in-out forwards";
+        gsap.to(seg, { scale: 1.08, duration: 0.4, ease: "back.out(2)" });
+        if (seg.scrollAnim) seg.scrollAnim.play();
+        if (isOpen) playSound(audioSelect);
       }
-    } else {
-      if (activeSegment) {
-        deactivateSegment(activeSegment);
-        activeSegment = null;
-      }
-    }
+    } else if (activeSegment) { deactivateSegment(activeSegment); activeSegment = null; }
     requestAnimationFrame(animate);
   }
 
-  const startDrag = (e) => {
+  const handleStart = (e) => {
     isDragging = true;
     const rect = joystick.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    const [cX, cY] = [rect.left + rect.width / 2, rect.top + rect.height / 2];
 
-    const move = (event) => {
+    const move = (ev) => {
       if (!isDragging) return;
-      const clientX = event.touches ? event.touches[0].clientX : event.clientX;
-      const clientY = event.touches ? event.touches[0].clientY : event.clientY;
+      const [mX, mY] = ev.touches ? [ev.touches[0].clientX, ev.touches[0].clientY] : [ev.clientX, ev.clientY];
+      const [dX, dY] = [mX - cX, mY - cY];
+      const dist = Math.sqrt(dX ** 2 + dY ** 2);
+      const max = 25; // maxDrag
 
-      const deltaX = clientX - centerX;
-      const deltaY = clientY - centerY;
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-      const maxDrag = 100 * 0.25;
-
-      if (distance <= 10) {
-        targetX = targetY = 0;
-      } else if (distance > maxDrag) {
-        const ratio = maxDrag / distance;
-        targetX = deltaX * ratio;
-        targetY = deltaY * ratio;
-      } else {
-        targetX = deltaX;
-        targetY = deltaY;
+      if (dist <= 10) { targetX = targetY = 0; }
+      else {
+        const ratio = dist > max ? max / dist : 1;
+        targetX = dX * ratio; targetY = dY * ratio;
       }
-      
-      if (event.cancelable) event.preventDefault();
+      if (ev.cancelable) ev.preventDefault();
     };
 
-    const stopDrag = () => {
-      // NAVIGATION LOGIC: If a segment is active when releasing, open the link
+    const stop = () => {
       if (isDragging && activeSegment) {
         const url = activeSegment.getAttribute("href");
-        if (url && url !== "#") {
-          window.open(url, "_blank");
-        }
+        if (url && url !== "#") window.open(url, "_blank");
       }
-
-      isDragging = false;
-      targetX = targetY = 0;
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseup", stopDrag);
-      window.removeEventListener("touchmove", move);
-      window.removeEventListener("touchend", stopDrag);
+      isDragging = false; targetX = targetY = 0;
+      window.removeEventListener("mousemove", move); window.removeEventListener("mouseup", stop);
+      window.removeEventListener("touchmove", move); window.removeEventListener("touchend", stop);
     };
 
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", stopDrag);
-    window.addEventListener("touchmove", move, { passive: false });
-    window.addEventListener("touchend", stopDrag);
+    window.addEventListener("mousemove", move); window.addEventListener("mouseup", stop);
+    window.addEventListener("touchmove", move, { passive: false }); window.addEventListener("touchend", stop);
   };
 
-  joystick.addEventListener("mousedown", startDrag);
-  joystick.addEventListener("touchstart", startDrag, { passive: false });
-
+  joystick.addEventListener("mousedown", handleStart);
+  joystick.addEventListener("touchstart", handleStart, { passive: false });
   animate();
 }
