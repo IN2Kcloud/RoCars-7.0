@@ -93,6 +93,9 @@ nav a:hover .menu-bg::before { transform: scaleX(1); transform-origin: center le
 @media(max-width: 2000px) {
   .project-details {padding: 2%;}
   .car-highlight,.car-year,.car-price,.car-specs,.car-services{margin-bottom:.33em;}
+  .title h1{font-size: 40px;}
+  .project-img{width:70%; height: 45%; left: 3em;}
+  .types-list li {margin: 0.1rem 0;}
 }
 
 @media (max-width:1300px){
