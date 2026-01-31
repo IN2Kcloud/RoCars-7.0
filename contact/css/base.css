@@ -99,7 +99,7 @@ a:hover{text-decoration:none;color:#111;outline:none;}
 .hover-effect--cursor-square .char{--opa:0;}
 .hover-effect--cursor-square .char::after{content:'';width:1ch;top:0;left:0;position:absolute;opacity:var(--opa);background:currentColor;height:100%;}
 .hover-effect--bg,.hover-effect--bg-south{--anim:0;}
-.hover-effect--bg::after,.hover-effect--bg-south::after{content:'';position:absolute;left:0;width:100%;height:calc(100% + 3px);top:0;background-color:#ffa666;filter: drop-shadow(0 0 2px #ffa666) drop-shadow(0 0 2px #ffa666); mix-blend-mode:normal;-webkit-backdrop-filter:blur(var(--bg-blur));backdrop-filter:blur(var(--bg-blur));transform-origin:0% 50%;transform:scaleX(var(--anim));z-index: -1;}
+.hover-effect--bg::after,.hover-effect--bg-south::after{content:'';position:absolute;left:0;width:100%;height:calc(100% + 3px);top:0;background-color:#ffa666;/*filter: drop-shadow(0 0 2px #ffa666) drop-shadow(0 0 2px #ffa666);*/ mix-blend-mode:normal;-webkit-backdrop-filter:blur(var(--bg-blur));backdrop-filter:blur(var(--bg-blur));transform-origin:0% 50%;transform:scaleX(var(--anim));z-index: -1;}
 .hover-effect--bg-south::after{z-index:-1;left:-8px;right:-8px;top:-8px;bottom:-8px;border-radius:2px;height:auto;width:auto;transform-origin:50% 100%;transform:scaleY(var(--anim));}
 /*.min-txt{position:absolute;left:0;bottom:0;width:100vw;height:100vh;z-index:-1;}*/
 @media screen and (min-width:40em){.list__item{grid-template-columns:auto 1fr 1fr 1fr auto;}}
