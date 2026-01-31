@@ -120,6 +120,132 @@ window.addEventListener('load', () => {
   initMarquee(".marqueecontent");
   initMarquee(".marqueecontentII", 45); // You can even give them different speeds!
 });
+
+// ========== WORD MORPHING ========== //
+
+const el = document.querySelector("#rocars-text");
+const glowColor = "#fff";
+const fonts = ["'Aero'", "'sickcapital'", "'SterousDemoRegular'", "'Street'", "'Wall'"];
+
+// Track the current font to prevent repeats
+let currentFont = "";
+
+function getNextFont() {
+    // Filter out the current font from the list of choices
+    const availableFonts = fonts.filter(f => f !== currentFont);
+    // Pick a random one from the remaining options
+    const nextFont = gsap.utils.random(availableFonts);
+    // Update the tracker
+    currentFont = nextFont;
+    return nextFont;
+}
+
+const decoLayer = document.querySelector("#decorations-layer");
+const charsLayer = document.querySelector("#glitch-chars");
+const symbols = ["X", "+", "?", "!", "0", "1", "#", "$", "//"];
+
+function spawnDecorations() {
+    // Clear old junk
+    decoLayer.innerHTML = '';
+    charsLayer.innerHTML = '';
+
+    // Create 5-8 random shards and symbols
+    for (let i = 0; i < 8; i++) {
+        // Create a Shape Shard
+        const shard = document.createElement('div');
+        shard.className = 'shard';
+        const size = gsap.utils.random(10, 60);
+        gsap.set(shard, {
+            width: size,
+            height: size / gsap.utils.random(1, 4),
+            x: gsap.utils.random(-200, 200),
+            y: gsap.utils.random(-100, 100),
+            rotation: gsap.utils.random(0, 360),
+            clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" // Triangle/Shard look
+        });
+        decoLayer.appendChild(shard);
+
+        // Create a flickering symbol
+        const char = document.createElement('div');
+        char.className = 'glitch-char';
+        char.innerText = gsap.utils.random(symbols);
+        gsap.set(char, {
+            x: gsap.utils.random(-150, 150),
+            y: gsap.utils.random(-80, 80),
+            rotation: gsap.utils.random(-30, 30)
+        });
+        charsLayer.appendChild(char);
+    }
+}
+
+// Inside your triggerAdvancedGlitch function:
+function triggerAdvancedGlitch() {
+    gsap.killTweensOf(el);
+    spawnDecorations(); // Add the junk!
+
+    const tl = gsap.timeline({
+        onComplete: () => {
+            // Hide the junk when glitch ends
+            gsap.set(".shard, .glitch-char", { opacity: 0 });
+            triggerAmbientChaos();
+            gsap.delayedCall(gsap.utils.random(1, 4), triggerAdvancedGlitch);
+        }
+    });
+
+    // 1. FLASH THE DECORATIONS
+    tl.set(".shard, .glitch-char", { 
+        opacity: () => Math.random() > 0.3 ? 0.7 : 0 
+    }, 0);
+
+    // Your existing SHOCK logic...
+    tl.to("#rocars-glitch-filter feTurbulence", { attr: { baseFrequency: "0.08 0.4" }, duration: 0.04 }, 0);
+    tl.to("#rocars-glitch-filter feDisplacementMap", { attr: { scale: 60 }, duration: 0.04 }, 0);
+
+    // FONT SWAP
+    tl.set(el, {
+        fontFamily: getNextFont(),
+        color: Math.random() > 0.5 ? "#ffa666" : "#fff"
+    }, 0.04);
+
+    // 2. THE JOLT (Move shapes with the word)
+    tl.to(".shard, .glitch-char", {
+        x: "+=" + gsap.utils.random(-20, 20),
+        y: "+=" + gsap.utils.random(-20, 20),
+        duration: 0.07,
+        textShadow: `-8px 0 #ffa666, 8px 0 #000, 0 0 20px ${glowColor}`,
+        duration: 0.07,
+        ease: "power4.inOut"
+    }, 0);
+
+    // 3. RECOVERY (Everything disappears)
+    tl.to("#rocars-glitch-filter feTurbulence", { attr: { baseFrequency: "0.00001" }, duration: 0.02 });
+    tl.to("#rocars-glitch-filter feDisplacementMap", { attr: { scale: 0 }, duration: 0.02 });
+    tl.to(".shard, .glitch-char", { opacity: 0, duration: 0.02 }, "<");
+    
+    // Reset word
+    tl.to(el, { opacity: 1, x: 0, y: 0, skewX: 0, color: "#000", textShadow: `0px 0px 3px ${glowColor}, 0px 0px 6px ${glowColor}`, duration: 0.05 }, ">");
+}
+
+function triggerAmbientChaos() {
+    const intensity = Math.random() > 0.8 ? 5 : 2; 
+    
+    gsap.to(el, {
+        x: gsap.utils.random(-intensity, intensity),
+        y: gsap.utils.random(-intensity, intensity),
+        rotation: gsap.utils.random(-intensity * 0.5, intensity * 0.5),
+        skewX: gsap.utils.random(-intensity, intensity),
+        duration: 0.03,
+        ease: "power2.out",
+        onComplete: () => {
+            gsap.delayedCall(gsap.utils.random(0.05, 0.2), triggerAmbientChaos);
+        }
+    });
+}
+
+// Initial Call
+triggerAmbientChaos();
+triggerAdvancedGlitch();
+
 /*
 // ========== NEON ========== //
 document.addEventListener("DOMContentLoaded", () => {
