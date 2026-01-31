@@ -18,6 +18,12 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
 @font-face{font-family:'BM';src:url('./assets/Black\ Mustang.ttf') format('truetype');font-display:swap;}
 @font-face{font-family:'BS';src:url('./assets/Building\ State\ Empire.ttf') format('truetype');font-display:swap;}
 
+@font-face{font-family:'Aero';src:url('./assets/Aero\ Font\ One.ttf') format('truetype');font-display:swap;}
+@font-face{font-family:'sickcapital';src:url('./assets/sickcapital-vice.ttf') format('truetype');font-display:swap;}
+@font-face{font-family:'SterousDemoRegular';src:url('./assets/SterousDemoRegular.ttf') format('truetype');font-display:swap;}
+@font-face{font-family:'Street';src:url('./assets/Street\ Wars\ Demo.ttf') format('truetype');font-display:swap;}
+@font-face{font-family:'Wall';src:url('./assets/Wall\ Hunter\ Demo.ttf') format('truetype');font-display:swap;}
+
 @keyframes rotate { from { rotate: 0deg; } 50% { scale: 1 1.5; } to { rotate: 360deg; } }
 #blob { background-color: white; height: 34vmax; aspect-ratio: 1; position: absolute; left: 50%; top: 50%; translate: -50% -50%; border-radius: 50%; background: linear-gradient(to right, var(--blob-color-1), var(--blob-color-2)); animation: rotate 20s infinite; opacity: 0.2; z-index: 1; }
 #blur { height: 100%; width: 100%; position: absolute; z-index: 2; backdrop-filter: blur(12vmax); }
@@ -78,8 +84,8 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
 
 .we {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; z-index: 2; /*background: linear-gradient(to right,transparent,black 5%,black 95%,transparent);*/ z-index: 5;pointer-events: none;}
 .hdr, .subhdr {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; backface-visibility: hidden; will-change: opacity, transform, filter; /* GPU acceleration */ user-select: none; -webkit-user-select: none;/* Safari */ -moz-user-select: none;/* Firefox */ -ms-user-select: none;/* IE/Edge */ }
-.hdr {z-index: 2; top: 20%;transform: translate(-50%, -50%) /*rotate(-10deg)*/; color: #fff; text-shadow: 0px 0px 3px #fff, 0px 0px 6px #fff, 0px 0px 9px #fff; font-size: 80px; font-weight: lighter; font-family:/*'Serpentine',*/ 'Barett Street', 'LEMONMILK-Regular', 'Roboto', sans-serif; letter-spacing: -5px; z-index: 2;}
-.subhdr { color: #fff; text-shadow: 0px 0px 5px #fff, 0px 0px 10px #fff; font-size: 120px; font-weight: lighter; font-family:'Serpentine', 'Barett Street', 'LEMONMILK-Regular', 'Roboto', sans-serif; letter-spacing: -3px; line-height: .3; text-transform: initial; text-align: center; /*filter:url(#text-distortion);*/}
+.hdr {z-index: 2; top: 40%;transform: translate(-50%, -50%) /*rotate(-10deg)*/; color: #fff; text-shadow: 0px 0px 3px #fff, 0px 0px 6px #fff, 0px 0px 9px #fff; font-size: 330px; font-weight: lighter; font-family:'BS', 'LEMONMILK-Regular', 'Roboto', sans-serif;filter:url(#text-distortion); letter-spacing: 5px; z-index: 2;}
+.subhdr { display: none; color: #fff; text-shadow: 0px 0px 5px #fff, 0px 0px 10px #fff; font-size: 120px; font-weight: lighter; font-family:'Serpentine', 'Barett Street', 'LEMONMILK-Regular', 'Roboto', sans-serif; letter-spacing: -3px; line-height: .3; text-transform: initial; text-align: center; /*filter:url(#text-distortion);*/}
 .subhdr span {color: #fff; text-shadow: 0px 0px 5px #fff, 0px 0px 10px #fff; font-size: 25px; line-height: .9; font-weight: bolder; letter-spacing: .8rem; font-family: /*'Barett Street',*/ 'LEMONMILK-Bold', 'Roboto', sans-serif; text-align: center;}
 .we p {z-index: 2; width: 100%; position: absolute; bottom: 20%; left: 50%; transform: translate(-50%, 0%); color: #fff; text-shadow: 0px 0px 3px #fff, 0px 0px 7px #fff; font-size: 25px; line-height: .9; font-weight: bolder; letter-spacing: 5px; font-family: /*'Barett Street',*/ 'LEMONMILK-Regular', 'Roboto', sans-serif; text-transform: initial; text-align: center; z-index: 2;}
 .we img {display: none; z-index: 2; width: 5%; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%) rotate(-20deg); filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 5px #fff);}
@@ -113,6 +119,74 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
 .video-glitch-wrapper video { position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0; transform: rotate(0deg); transition: all 0.5s ease-out; }
 
 .bbg {position: fixed; bottom: 10%; left: 50%; transform: translateX(-50%); z-index: 6; background-color: #000; opacity: .5; pointer-events: none; width: 100px; height: 100px; border-radius: 50%;}
+
+/* ========== WORD MORPHING ========== */
+
+.glitch-container {
+  position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 100px;
+  z-index: 5;
+}
+
+.glitch-word {
+  font-family: 'Serpentine', 'Barett Street', 'LEMONMILK-bold', 'Roboto', sans-serif;
+  font-size: 10rem;
+  font-weight: lighter;
+  color: #000;
+  -webkit-text-stroke: 1px #000;
+  text-transform: initial;
+  /*letter-spacing: -0.1em;*/
+  position: relative;
+  
+  /* Apply the SVG filter */
+  filter: url(#rocars-glitch-filter);
+  
+  /* Initial glow */
+  text-shadow: 0px 0px 3px var(#fff), 0px 0px 9px var(#fff);
+  
+  /* Prevents layout shifts */
+  display: inline-block;
+  min-width: 450px; 
+  user-select: none;
+}
+.glitch-word {  
+  /* Add a slight motion blur feel to the jumps */
+  transition: text-shadow 0.1s ease; 
+  /* Ensures the font swap doesn't shift the whole layout */
+  text-align: center;
+  display: block; 
+  margin: auto;
+}
+
+/* Random shapes */
+.shard {
+  position: absolute;
+  background: #ffa666;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Random flickering letters */
+.glitch-char {
+  position: absolute;
+  font-family: 'Serpentine', 'Barett Street', 'LEMONMILK-bold', 'Roboto', sans-serif;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 0px 0px 3px var(#fff), 0px 0px 9px var(#fff);
+  font-size: 3rem;
+  opacity: 0;
+}
+
+/* Hand-drawn 'X' or '+' marks */
+.mark {
+  position: absolute;
+  color: #000;
+  text-shadow: 0px 0px 3px var(#fff), 0px 0px 9px var(#fff);
+  font-size: 3rem;
+  font-family: 'Arial';
+  opacity: 0;
+}
 
 /* TV WINDOW */
 .tv-wrapper { position: fixed; bottom: 10%; left: 50%; transform: translateX(-50%); z-index: 5; mix-blend-mode: screen; border-radius: 50%; cursor: pointer; z-index: 11;}
