@@ -134,6 +134,19 @@
       <img class="hdrII" src="./assets/RoCarsW.png"></img>
     </div>
 
+    <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+      <filter id="rocars-glitch-filter">
+        <feTurbulence type="fractalNoise" baseFrequency="0.00001" numOctaves="1" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+    
+    <div class="glitch-container">
+      <div id="decorations-layer"></div> <h1 id="rocars-text" class="glitch-word">RoCars</h1>
+      <div id="glitch-chars"></div> </div>
+      <h1 id="rocars-text" class="glitch-word">RoCars</h1>
+    </div>
+
     <svg style="display: none;">
       <defs>
         <filter id="glitch-filter">
