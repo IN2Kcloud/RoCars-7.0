@@ -240,7 +240,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .absolute {visibility: visible;}
   .logo-glitch-wrapper{width: 120vw;}
   .marqueecontainer {top: 10%;}
-  .marqueecontentII span {font-size: 38rem;}
+  .marqueecontentII span {font-size: 36rem;}
   .hdr {font-size: 40px; top: 28%;}
   .subhdr {/*font-size: 66px;*/ scale: .8;transform-origin: top left; /* Or 0% 0% */}
   /*.subhdr span {font-size: 20px; letter-spacing: 1px;}*/
