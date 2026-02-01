@@ -3,8 +3,11 @@ const audioSelect = new Audio("./public/menu-select.mp3");
 const audioOpen = new Audio("./public/menu-open.mp3");
 const audioClose = new Audio("./public/menu-close.mp3");
 
-// Optimization: Play sound from memory instantly
+// Optimization: Play sound from memory instantly, BUT only if not on mobile
 function playSound(audio) {
+  // Check responsive config to disable sound on mobile
+  if (responsiveConfig.isMobile) return; 
+
   audio.pause();
   audio.currentTime = 0;
   audio.play().catch(() => {}); 
@@ -30,6 +33,7 @@ function getResponsiveConfig() {
   const menuSize = isMobile ? Math.min(maxSize, 480) : 700;
 
   return {
+    isMobile,
     menuSize,
     center: menuSize / 2,
     innerRadius: menuSize * 0.08,
@@ -111,7 +115,12 @@ function createSegment(item, index, total) {
 
   const marqueeContent = segment.querySelector('.marquee-content');
   const scrollAnim = gsap.to(marqueeContent, {
-    xPercent: -33.33, ease: "none", duration: 6, repeat: -1, paused: true
+    xPercent: -33.33, 
+    ease: "none", 
+    duration: 6, 
+    repeat: -1, 
+    paused: true,
+    force3D: true // Performance boost for mobile browsers
   });
 
   segment.scrollAnim = scrollAnim;
@@ -214,7 +223,7 @@ function initCenterDrag() {
       const [mX, mY] = ev.touches ? [ev.touches[0].clientX, ev.touches[0].clientY] : [ev.clientX, ev.clientY];
       const [dX, dY] = [mX - cX, mY - cY];
       const dist = Math.sqrt(dX ** 2 + dY ** 2);
-      const max = 25; // maxDrag
+      const max = 25; 
 
       if (dist <= 10) { targetX = targetY = 0; }
       else {
@@ -227,7 +236,8 @@ function initCenterDrag() {
     const stop = () => {
       if (isDragging && activeSegment) {
         const url = activeSegment.getAttribute("href");
-        if (url && url !== "#") window.open(url, "_blank");
+        //if (url && url !== "#") window.open(url, "_blank");
+        if (url && url !== "#") window.location.href = url;
       }
       isDragging = false; targetX = targetY = 0;
       window.removeEventListener("mousemove", move); window.removeEventListener("mouseup", stop);
