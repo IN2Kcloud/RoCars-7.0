@@ -131,7 +131,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
 
 .glitch-word {
   font-family: 'Serpentine', 'Barett Street', 'LEMONMILK-bold', 'Roboto', sans-serif;
-  font-size: 10rem;
+  font-size: 12rem;
   font-weight: lighter;
   color: #000;
   -webkit-text-stroke: 1px #000;
@@ -272,7 +272,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .tv-wrapper:hover ~ .logo-glitch-wrapper{ width: 84vw; }
   .marqueecontainer {top: 8%;}
   .marqueecontentII span {font-size: 57rem;}
-  .hdr {font-size: 50px; top: 25%;}
+  .hdr {font-size: 400px; top: 40%;}
   .subhdr {/*font-size: 66px;*/ scale: .8;transform-origin: top left; /* Or 0% 0% */}
   /*.subhdr span {font-size: 20px; letter-spacing: 1px;}*/
   .we img {width: 20%;}
@@ -290,7 +290,8 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .marqueecontainer {top: 8%;}
   .marqueecontainerII {bottom: 5%;}
   .marqueecontentII span {font-size: 48rem;}
-  .hdr {font-size: 50px; top: 25%;}
+  .glitch-word {font-size: 7rem;}
+  .hdr {font-size: 200px; top: 40%;}
   .subhdr {font-size: 66px;}
   .subhdr span {font-size: 20px; letter-spacing: 1px;}
   .we img {width: 20%;}
