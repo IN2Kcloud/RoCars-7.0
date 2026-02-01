@@ -5,7 +5,9 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
 @media(max-width: 1000px) {body::after {display: none;}}
 a { text-decoration: none; outline: none; }
 @font-face { font-family: 'LEMONMILK-Regular'; src: url('../assets/LEMONMILK-Regular.otf') format('opentype'); font-display: swap; }
+@font-face{font-family:'LEMONMILK-Bold';src:url('../../assets/LEMONMILK-Bold.otf') format('opentype');font-display:swap;}
 @font-face{font-family:'Barett Street';src:url('../../assets/Barett\ Street.ttf') format('truetype');font-display:swap;}
+
 section { position: relative; width: 100vw; min-height: 100vh; overflow: hidden; }
 svg{position:absolute;left: 0; top: 0; z-index: -1;}
 img { width: 100%; height: 100%; object-fit: cover; backface-visibility: hidden; }
@@ -132,9 +134,9 @@ img { width: 100%; height: 100%; object-fit: cover; backface-visibility: hidden;
 .grid__item-imgwrap > .grid__item-img { position:absolute; top:calc(-1 * 0px); left:calc(-1 * 0px); height:calc(100% + 0px * 2); width:calc(100% + 0px * 2); }
 .text { text-transform:uppercase; display:flex; align-content:center; font-size:clamp(2rem,10vw,6rem); line-height:0.7; }
 .font-alt { font-family:'LEMONMILK-Regular','Roboto',sans-serif; font-weight:400; }
-.credits2 { position: relative; width: fit-content; height: 5%; font-size:clamp(1rem,5vw,3rem); text-transform:uppercase; text-align:center; margin:100vh auto 0; margin-bottom:5vh; cursor: pointer;}
+.credits2 { position: relative; width: fit-content; height: 15%; font-family: 'LEMONMILK-Bold', 'Roboto', sans-serif; font-size:clamp(1rem,5vw,3rem);letter-spacing: 2px; display: flex;flex-direction: column;justify-content: start; text-align:center; margin:100vh auto 0; margin-bottom:5vh; cursor: pointer;}
 .credits2 a {color: #fff; text-shadow:0px 0px 0.5rem transparent;  transition: all .5s ease-in-out;}
-.credits2:hover a{color: #ffa666; text-shadow:0px 0px 0.5rem #ffa666;}
+.credits2 a:hover{color: #ffa666; text-shadow:0px 0px 0.5rem #ffa666;}
 .weII {position: absolute; bottom: 40vh; left: 50%; transform: translateX(-50%); width: 80%; height: 10vh; z-index: 2;}
 .hdrII, .subhdrII {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; user-select: none; -webkit-user-select: none;/* Safari */ -moz-user-select: none;/* Firefox */ -ms-user-select: none;/* IE/Edge */ }
 .hdrII { color: #fff; text-shadow: 0px 0px .5rem #fff; font-size: 100px; font-family:'LEMONMILK-Regular', 'Roboto', sans-serif; letter-spacing: 0rem; line-height: .9; }
@@ -142,6 +144,16 @@ img { width: 100%; height: 100%; object-fit: cover; backface-visibility: hidden;
 
 
 @media (orientation: portrait) {.rotate-on-portrait { transform: rotate(90deg); transform-origin: center center; }}
+
+@media (max-width:2000px){
+  .stack__img{width:calc(100vw / 8);}
+  .content__txt-inner{font-size:3rem;}
+  .content__nav-button{font-size:2rem;}
+  .text {font-size:clamp(1rem,5vw,3rem); letter-spacing: 5px;}
+  .hdrII {font-size: 60px;}
+  .subhdrII {font-size: 100px;}
+  .credits2 { font-size:clamp(1rem,3vw,2rem); }
+}
 
 @media (max-width:1300px){
   .we {top: 2vh;}
