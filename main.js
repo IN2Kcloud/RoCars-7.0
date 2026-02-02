@@ -1,11 +1,79 @@
-
+// LOADER ==============================
 window.addEventListener('load', () => {
-  document.body.classList.remove('before-load');
+    const tl = gsap.timeline();
+    const counterDisplay = document.querySelector('.load-counter');
+    let loadProgress = { value: 0 };
+
+    // 1. Forced 5-Second "Heavy System Check" Sequence
+    tl.to(loadProgress, {
+        value: 100,
+        duration: 5,
+        // Using a "SlowMo" ease combined with steps makes it look like it's 
+        // struggling at 20% and 80% (classic loading behavior)
+        ease: "slow(0.1, 0.8, false)", 
+        onUpdate: () => {
+            // Randomly flicker the opacity slightly during update for realism
+            if (Math.random() > 0.85) {
+                counterDisplay.style.opacity = "0.5";
+            } else {
+                counterDisplay.style.opacity = "1";
+            }
+            
+            const displayVal = Math.round(loadProgress.value).toString().padStart(2, '0');
+            if(counterDisplay) counterDisplay.innerText = displayVal;
+        }
+    });
+
+    // The bar mirrors the "struggle" of the counter
+    tl.to(".load-bar", {
+        width: "100%",
+        duration: 5,
+        ease: "slow(0.1, 0.8, false)"
+    }, 0); 
+
+    // 2. Flicker the status text near the end for a "glitch" effect
+    tl.to(".load-status", {
+        opacity: 0,
+        repeat: 3,
+        yoyo: true,
+        duration: 0.1
+    }, 4.5);
+
+    // 3. Fade out the loader content
+    tl.to(".loading-content", {
+        opacity: 0,
+        duration: 0.4,
+        ease: "power4.inOut"
+    });
+
+    // 3. THE REVEAL: Snap open the shutters
+    // Note: yPercent: -102/102 ensures no tiny slivers of black remain
+    tl.to(".shutter-top", { yPercent: -102, duration: 1.5, ease: "expo.inOut" }, "+=0.2");
+    tl.to(".shutter-bottom", { yPercent: 102, duration: 1.5, ease: "expo.inOut" }, "<");
+
+    // 4. The "Ignition" Reveal (Page Elements)
+    tl.set(".marqueecontainer, .logo-glitch-wrapper, .we, .tv-wrapper, .pulse-circles", { 
+        visibility: "visible" 
+    });
+
+    tl.fromTo(".logo-glitch-wrapper", 
+        { scale: 2, opacity: 0, filter: "blur(20px)" }, 
+        { scale: 1, opacity: 1, filter: "blur(0px)", duration: 2.5, ease: "power4.out" }, "-=0.8");
+
+    tl.fromTo(".marqueecontainer", 
+        { y: -50, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 1.2, ease: "back.out(1.2)" }, "-=1.8");
+
+    tl.fromTo(".tv-wrapper, .pulse-circles", 
+        { y: 80, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power4.out" }, "-=1.5");
+
+    tl.to(".we", { opacity: 1, duration: 1.5 }, "-=1");
+
+    // Clean up
+    tl.set(".loading", { display: "none" });
 });
 
-document.querySelector('.loading').addEventListener('transitionend', (e) => {
-  document.body.removeChild(e.currentTarget);
-});
 
 
 /* -- Glow effect -- */
@@ -120,7 +188,7 @@ window.addEventListener('load', () => {
   initMarquee(".marqueecontent");
   initMarquee(".marqueecontentII", 45); // You can even give them different speeds!
 });
-
+/*
 // ========== WORD MORPHING ========== //
 
 const el = document.querySelector("#rocars-text");
@@ -245,7 +313,7 @@ function triggerAmbientChaos() {
 // Initial Call
 triggerAmbientChaos();
 triggerAdvancedGlitch();
-
+*/
 /*
 // ========== NEON ========== //
 document.addEventListener("DOMContentLoaded", () => {
