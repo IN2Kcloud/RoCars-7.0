@@ -131,7 +131,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
 
 .void-filler-text {
   position: absolute;
-  top: 18%; /* Sits right above the marquee line */
+  top: 28%; /* Sits right above the marquee line */
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Courier New', monospace; /* Use a mono font for tech feel */
@@ -147,7 +147,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   position: absolute;
   font-size: 12px;
   color: #fff;
-   text-shadow: 0px 0px 2px #fff, 0px 0px 5px #fff;
+  text-shadow: 0px 0px 2px #fff, 0px 0px 5px #fff;
   font-family: monospace;
   letter-spacing: 1px;
   padding: 2px 5px;
@@ -155,8 +155,8 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   z-index: 10;
 }
 /* Position them in the "corners" of the center void */
-.tag-top-left { top: 20%; left: 30%; }
-.tag-top-right { top: 20%; right: 30%; }
+.tag-top-left { top: 30%; left: 30%; }
+.tag-top-right { top: 30%; right: 30%; }
 
 .video-glitch-wrapper { position: absolute; top: 50%; left: 50%; width: 100vw; height: 100vh; transform: translate(-50%, -50%) rotate(0deg); transition: transform 0.05s ease-out, width 0.5s ease, opacity 1s ease; pointer-events: auto; mix-blend-mode: screen; opacity: 0; z-index: 2; }
 .video-glitch-wrapper video { position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0; transform: rotate(0deg); transition: all 0.5s ease-out; }
@@ -321,13 +321,13 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .we p {font-size: 16px; bottom: 25%;}
   .joystick{width:80px;height:80px;}
   .marquee-text {font-size: 2rem;}
-  .void-filler-text {font-size: 12px; letter-spacing: 0px; width: 90%; top: 20%;}
+  .void-filler-text {font-size: 12px; letter-spacing: 0px; width: 90%; top: 30%;}
   .hud-top {bottom: 20px;}
   .hud-label { font-size: 11px; letter-spacing: 0px; }
   .hud-value { font-size: 15px; letter-spacing: 0px; }
   .telemetry-tag { font-size: 10px; letter-spacing: 1px; }
-  .tag-top-left { top: 24%; left: 5%; }
-  .tag-top-right { top: 24%; right: 5%; }
+  .tag-top-left { top: 34%; left: 5%; }
+  .tag-top-right { top: 34%; right: 5%; }
 }
 
 @media (max-width: 550px) and (min-height: 850px) {
@@ -357,10 +357,10 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .we img {width: 20%;}
   .we p {font-size: 16px; bottom: 28%;}
   .marquee-text {font-size: 2rem;}
-  .void-filler-text {font-size: 10px; letter-spacing: 0px; width: 90%; top: 18%;}
+  .void-filler-text {font-size: 10px; letter-spacing: 0px; width: 90%; top: 30%;}
   .hud-top {bottom: 20px;}
-  .tag-top-left { top: 22%; left: 5%; }
-  .tag-top-right { top: 22%; right: 5%; }
+  .tag-top-left { top: 34%; left: 5%; }
+  .tag-top-right { top: 34%; right: 5%; }
 }
 
 /* Loader CSS */
