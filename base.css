@@ -315,11 +315,13 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .subhdr {font-size: 66px;}
   .subhdr span {font-size: 20px; letter-spacing: 1px;}
   .we img {width: 20%;}
-  .we p {font-size: 20px; bottom: 25%;}
+  .we p {font-size: 16px; bottom: 25%;}
   .joystick{width:80px;height:80px;}
   .marquee-text {font-size: 2rem;}
-  .void-filler-text {font-size: 10px; letter-spacing: 0px; width: 90%;}
+  .void-filler-text {font-size: 11px; letter-spacing: 0px; width: 90%;}
   .hud-top {bottom: 20px;}
+  .hud-label { font-size: 11px; letter-spacing: 0px; }
+  .hud-value { font-size: 15px; letter-spacing: 0px; }
 }
 
 @media (max-width:500px) {
@@ -365,6 +367,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
 .marqueecontainer, .logo-glitch-wrapper, .we, .tv-wrapper, .pulse-circles { opacity: 0; visibility: hidden; }
 @media(max-width: 1000px) {
   .loading-circle {width: 90vw;}
-  .load-counter { font-size: 7rem;}
-  .load-status { top: 88%; font-size: 1rem; letter-spacing: 1px; }
+  .load-counter { font-size: 7rem; top: 66%;}
+  .load-status { top: 77%; font-size: 1rem; letter-spacing: 1px; }
+  .load-bar-container {top: 80%;}
 }
