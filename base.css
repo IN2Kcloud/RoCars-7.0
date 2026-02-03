@@ -87,7 +87,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
 .hdr {display: none; z-index: 2; top: 50%;transform: translate(-50%, -50%) /*rotate(-10deg)*/; color: #fff; text-shadow: 0px 0px 3px #fff, 0px 0px 6px #fff, 0px 0px 9px #fff; font-size: 500px; font-weight: lighter; font-family:'BS', 'LEMONMILK-Regular', 'Roboto', sans-serif;filter:url(#text-distortion); letter-spacing: 5px; z-index: 2;}
 .subhdr { display: none; color: #fff; text-shadow: 0px 0px 5px #fff, 0px 0px 10px #fff; font-size: 120px; font-weight: lighter; font-family:'Serpentine', 'Barett Street', 'LEMONMILK-Regular', 'Roboto', sans-serif; letter-spacing: -3px; line-height: .3; text-transform: initial; text-align: center; /*filter:url(#text-distortion);*/}
 .subhdr span {color: #fff; text-shadow: 0px 0px 5px #fff, 0px 0px 10px #fff; font-size: 25px; line-height: .9; font-weight: bolder; letter-spacing: .8rem; font-family: /*'Barett Street',*/ 'LEMONMILK-Bold', 'Roboto', sans-serif; text-align: center;}
-.we p {z-index: 2; width: 100%; position: absolute; bottom: 20%; left: 50%; transform: translate(-50%, 0%); color: #fff; text-shadow: 0px 0px 3px #fff, 0px 0px 7px #fff; font-size: 25px; line-height: .9; font-weight: bolder; letter-spacing: 5px; font-family: /*'Barett Street',*/ 'LEMONMILK-Bold', 'Roboto', sans-serif; text-transform: initial; text-align: center; z-index: 2;}
+.we p {z-index: 2; width: 100%; position: absolute; bottom: 20%; left: 50%; transform: translate(-50%, 0%); color: #fff; text-shadow: 0px 0px 2px #fff, 0px 0px 5px #fff; font-size: 25px; line-height: .9; font-weight: bolder; letter-spacing: 5px; font-family: /*'Barett Street',*/ 'LEMONMILK-Bold', 'Roboto', sans-serif; text-transform: initial; text-align: center; z-index: 2;}
 .we img {display: none; z-index: 2; width: 5%; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%) rotate(-20deg); filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 5px #fff);}
 
 .marqueecontainerII {
@@ -143,13 +143,27 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   z-index: 9;
 }
 
+.telemetry-tag {
+  position: absolute;
+  font-size: 12px;
+  color: #fff;
+  font-family: monospace;
+  letter-spacing: 1px;
+  padding: 2px 5px;
+  border-left: 1px solid #fff;
+  z-index: 10;
+}
+/* Position them in the "corners" of the center void */
+.tag-top-left { top: 17%; left: 30%; }
+.tag-top-right { top: 17%; right: 30%; }
+
 .video-glitch-wrapper { position: absolute; top: 50%; left: 50%; width: 100vw; height: 100vh; transform: translate(-50%, -50%) rotate(0deg); transition: transform 0.05s ease-out, width 0.5s ease, opacity 1s ease; pointer-events: auto; mix-blend-mode: screen; opacity: 0; z-index: 2; }
 .video-glitch-wrapper video { position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0; transform: rotate(0deg); transition: all 0.5s ease-out; }
 
 .bbg {position: fixed; bottom: 10%; left: 50%; transform: translateX(-50%); z-index: 6; background-color: #000; opacity: .5; pointer-events: none; width: 100px; height: 100px; border-radius: 50%;}
 
 /* ========== WORD MORPHING ========== */
-
+/*
 .glitch-container {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
   text-align: center;
@@ -165,30 +179,20 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   color: #000;
   -webkit-text-stroke: 1px #000;
   text-transform: initial;
-  /*letter-spacing: -0.1em;*/
   position: relative;
-  
-  /* Apply the SVG filter */
   filter: url(#rocars-glitch-filter);
-  
-  /* Initial glow */
   text-shadow: 0px 0px 3px var(#fff), 0px 0px 9px var(#fff);
-  
-  /* Prevents layout shifts */
   display: inline-block;
   min-width: 450px; 
   user-select: none;
 }
 .glitch-word {  
-  /* Add a slight motion blur feel to the jumps */
   transition: text-shadow 0.1s ease; 
-  /* Ensures the font swap doesn't shift the whole layout */
   text-align: center;
   display: block; 
   margin: auto;
 }
 
-/* Random shapes */
 .shard {
   position: absolute;
   background: #ffa666;
@@ -196,7 +200,6 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   pointer-events: none;
 }
 
-/* Random flickering letters */
 .glitch-char {
   position: absolute;
   font-family: 'Aero', 'sickcapital', 'SterousDemoRegular', 'Street', 'Wall';
@@ -207,7 +210,6 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   opacity: 0;
 }
 
-/* Hand-drawn 'X' or '+' marks */
 .mark {
   position: absolute;
   color: #000;
@@ -216,7 +218,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   font-family: 'Arial';
   opacity: 0;
 }
-
+*/
 /* TV WINDOW */
 .tv-wrapper { position: fixed; bottom: 10%; left: 50%; transform: translateX(-50%); z-index: 5; mix-blend-mode: screen; border-radius: 50%; cursor: pointer; z-index: 11;}
 .tv-window { position: relative; width: 100px; aspect-ratio: 1/1; border-radius: 50%; clip-path: circle(50% at 50% 50%); transform: translate3d(0, 0, 0); transition: transform 0.3s ease-out; pointer-events: auto; }
@@ -291,7 +293,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .logo-glitch-wrapper-b{width: 84vw;}
   .tv-wrapper:hover ~ .logo-glitch-wrapper{ width: 84vw; }
   .marqueecontainer {top: 8%;}
-  .marqueecontentII span {font-size: 57rem;}
+  .marqueecontentII span {font-size: 56rem;}
   .hdr {font-size: 400px; top: 40%;}
   .subhdr {/*font-size: 66px;*/ scale: .8;transform-origin: top left; /* Or 0% 0% */}
   /*.subhdr span {font-size: 20px; letter-spacing: 1px;}*/
@@ -318,10 +320,13 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .we p {font-size: 16px; bottom: 25%;}
   .joystick{width:80px;height:80px;}
   .marquee-text {font-size: 2rem;}
-  .void-filler-text {font-size: 11px; letter-spacing: 0px; width: 90%;}
+  .void-filler-text {font-size: 12px; letter-spacing: 0px; width: 90%;}
   .hud-top {bottom: 20px;}
   .hud-label { font-size: 11px; letter-spacing: 0px; }
   .hud-value { font-size: 15px; letter-spacing: 0px; }
+  .telemetry-tag { font-size: 10px; letter-spacing: 1px; }
+  .tag-top-left { top: 19%; left: 5%; }
+  .tag-top-right { top: 19%; right: 5%; }
 }
 
 @media (max-width:500px) {
@@ -349,6 +354,8 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .marquee-text {font-size: 2rem;}
   .void-filler-text {font-size: 10px; letter-spacing: 0px; width: 90%; top: 18%;}
   .hud-top {bottom: 20px;}
+  .tag-top-left { top: 22%; left: 5%; }
+  .tag-top-right { top: 22%; right: 5%; }
 }
 
 /* Loader CSS */
@@ -359,7 +366,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
 .shutter-bottom { bottom: 0; border-top: 1px solid transparent; }
 .loading-circle {width: 33vw; object-fit: cover;}
 .loading-circle img { width: 100%; filter: drop-shadow(0px 0px 10px #fff);}
-.load-counter { position: absolute;top: 80%;left: 50%;transform: translate(-50%, -50%); font-family: 'Serpentine', 'LEMONMILK-Bold', sans-serif; font-size: 10rem; color: #fff; margin-top: 15px; letter-spacing: 5px; text-shadow: 0 0 15px #fff; }
+.load-counter { position: absolute;top: 79%;left: 50%;transform: translate(-50%, -50%); font-family: 'Serpentine', 'LEMONMILK-Bold', sans-serif; font-size: 10rem; color: #fff; margin-top: 15px; letter-spacing: 5px; text-shadow: 0 0 15px #fff; }
 .load-status { position: absolute;top: 88%;left: 50%;transform: translate(-50%, -50%); width: 100%; font-family: 'LEMONMILK-Regular', sans-serif; font-size: 1rem; color: #fff; text-shadow: 0 0 15px #fff; text-align: center; margin-top: 10px; letter-spacing: 10px; text-transform: uppercase; }
 .load-bar-container { width: 80%; height: 5px; background: transparent; margin-top: 20px; position: absolute;top: 90%;left: 50%;transform: translate(-50%, -50%); }
 .load-bar { position: absolute; width: 0%; height: 100%; border-radius: 50%; background: #fff; box-shadow: 0 0 10px #fff; }
