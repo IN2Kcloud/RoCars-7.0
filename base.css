@@ -116,6 +116,33 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   pointer-events: none;user-select: none; -webkit-user-select: none;/* Safari */ -moz-user-select: none;/* Firefox */ -ms-user-select: none;/* IE/Edge */
 }
 
+.hud-top {
+  position: absolute;
+  bottom: 33px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 10;
+  font-family: 'Courier New', monospace; /* Use a mono font for tech feel */
+}
+.hud-label { color: #ccc; font-size: 14px; display: block; letter-spacing: 2px; }
+.hud-value { color: #fff; font-size: 18px; letter-spacing: 2px; font-weight: bold; text-shadow: 0 0 5px #fff; }
+
+.void-filler-text {
+  position: absolute;
+  top: 15%; /* Sits right above the marquee line */
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Courier New', monospace; /* Use a mono font for tech feel */
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 0 0 5px #fff;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  z-index: 9;
+}
+
 .video-glitch-wrapper { position: absolute; top: 50%; left: 50%; width: 100vw; height: 100vh; transform: translate(-50%, -50%) rotate(0deg); transition: transform 0.05s ease-out, width 0.5s ease, opacity 1s ease; pointer-events: auto; mix-blend-mode: screen; opacity: 0; z-index: 2; }
 .video-glitch-wrapper video { position: absolute; width: 100%; height: 100%; object-fit: cover; top: 0; left: 0; transform: rotate(0deg); transition: all 0.5s ease-out; }
 
@@ -291,6 +318,8 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .we p {font-size: 20px; bottom: 25%;}
   .joystick{width:80px;height:80px;}
   .marquee-text {font-size: 2rem;}
+  .void-filler-text {font-size: 10px; letter-spacing: 0px; width: 90%;}
+  .hud-top {bottom: 20px;}
 }
 
 @media (max-width:500px) {
@@ -308,6 +337,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .absolute {visibility: visible;}
   .logo-glitch-wrapper{width: 120vw;}
   .marqueecontainer {top: 10%;}
+  .marqueecontent span {font-size: 4rem;}
   .marqueecontentII span {font-size: 36rem;}
   .hdr {font-size: 40px; top: 28%;}
   .subhdr {/*font-size: 66px;*/ scale: .8;transform-origin: top left; /* Or 0% 0% */}
@@ -315,6 +345,8 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
   .we img {width: 20%;}
   .we p {font-size: 16px; bottom: 28%;}
   .marquee-text {font-size: 2rem;}
+  .void-filler-text {font-size: 10px; letter-spacing: 0px; width: 90%; top: 18%;}
+  .hud-top {bottom: 20px;}
 }
 
 /* Loader CSS */
