@@ -135,7 +135,7 @@ body::after {content: '';position: absolute;top: 0;left: 0;height: 100%;width: 1
 
 /* ========== SQUARED MARQUEE ========== */
 .sq-marquee-wrapper { position: absolute;top:50%;left:50%;transform:translate(-50%, -50%); z-index: 10; width: 80%; max-width: 2000px; margin: auto; background: transparent; display:none;}
-svg { width: 100%; height: auto; display: block; filter: drop-shadow(0px 0px 10px #fff); }
+svg { width: 100%; height: auto; display: block; filter: drop-shadow(0px 0px 10px #fff); display:none;}
 .marquee-path {pointer-events: none;user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;}
 /* Toggle visibility */
 .mobile-only { display: none; }
