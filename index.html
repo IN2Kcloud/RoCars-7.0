@@ -25,7 +25,7 @@
         <div class="loading-circle">
           <img src="assets/RoCarsTXT.gif" alt="Loading">
         </div>
-        <div class="load-counter">00</div>
+        <div class="load-counter"></div>
         <div class="load-bar-container">
             <div class="load-bar"></div>
         </div>
@@ -33,11 +33,9 @@
       </div>
     </div>
 
-    <div id="blob"></div> 
-    <div id="blur"></div>
+    <canvas id="grid-bg"></canvas>
     
     <span class="bbg"></span>
-    
     <div class="tv-wrapper menu-toggle-btn">
       <div id="window" class="tv-window hover-zone">
         <div class="vhs-effect">
@@ -55,9 +53,6 @@
       <span class="circle"></span>
       <span class="circle"></span>
     </div>
-
-    <!--<div class="telemetry-ring"></div>-->
-
     <div class="menu-overlay">
       <div class="menu-bg"></div>
       <div id="menublur"></div>
@@ -72,7 +67,6 @@
           <a href="https://www.tiktok.com/@b.rocars" target="_blank"><ion-icon name="logo-tiktok"></ion-icon></a>
         </div>
       </div>
-
       <div class="menu-overlay-footer">
         <p>ROCARS &copy; 2025 All Rights Reserved</p>
         <div class="menu-overlay-items">
@@ -81,7 +75,6 @@
           <a href="#"><span class="menubg"></span>Legal Disclaimer</a>
         </div>
       </div>
-
       <div class="circular-menu">
         <div class="joystick">
           <img src="./public/RoCarsB.png" class="center-icon center-main" alt="RoCars">
@@ -91,232 +84,416 @@
           <ion-icon name="chevron-forward-sharp" class="center-icon center-right"></ion-icon>
         </div>
       </div>
-      
     </div>
- 
-    <div class="absolute">
-			<div class="absolute inset-0 jc">
-			  <div class="bg-shape1 bg-pr o50 bg-blur"></div>
-			  <div class="bg-shape2 bg-gd o50 bg-blur"></div>
-			  <div class="bg-shape1 bg-rd o50 bg-blur"></div>
-			</div>
-		</div>
 
 	  <div class="logo-glitch-wrapper">
       <img src="./assets/RoCarsO.svg" class="logo-base" alt="Logo">
       <!--<img src="./assets/RCMRQW.png" class="logo-base MQB" alt="Logo">-->
     </div>
-
-    <div class="marqueecontainer fade-sides">
-      <div class="marqueecontent">
-        <span>•</span>
-        <span class="RC">RoCars</span>
-        <span>•</span>
-        <span>where horsepower meets cinematic excellence</span>
-        <span>•</span>
-        <span class="RC">RoCars</span>
-        <span>•</span>
-        <span>supercars, classic legends & luxury automotive brands</span>
-        <span>•</span>
-        <span class="RC">RoCars</span>
-        <span>•</span>
-        <span>where horsepower meets cinematic excellence</span>
-        <span>•</span>
-        <span class="RC">RoCars</span>
-        <span>•</span>
-        <span>supercars, classic legends & luxury automotive brands</span>
-      </div>
-    </div>
-
-    <div class="we"> 
-      <div class="marqueecontainerII fade-sides">
-        <div class="marqueecontentII">
-          <span>RoCars&nbsp;</span>
-          <span>Roman With Cars&nbsp;</span>
-          <span>RoCars&nbsp;</span>
-          <span>Roman With Cars&nbsp;</span>
-          <span>RoCars&nbsp;</span>
-          <span>Roman With Cars&nbsp;</span>
-          <span>RoCars&nbsp;</span>
-          <span>Roman With Cars&nbsp;</span>
+    
+    <section class="hero">
+      <div class="marqueecontainer fade-sides">
+        <div class="marqueecontent">
+          <span>•</span>
+          <span class="RC">RoCars</span>
+          <span>•</span>
+          <span>where horsepower meets cinematic excellence</span>
+          <span>•</span>
+          <span class="RC">RoCars</span>
+          <span>•</span>
+          <span>supercars, classic legends & luxury automotive brands</span>
+          <span>•</span>
+          <span class="RC">RoCars</span>
+          <span>•</span>
+          <span>where horsepower meets cinematic excellence</span>
+          <span>•</span>
+          <span class="RC">RoCars</span>
+          <span>•</span>
+          <span>supercars, classic legends & luxury automotive brands</span>
         </div>
       </div>
-      
-      <div class="sq-marquee-wrapper desktop-only">
-          <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <path id="path43" d="M 150,150 L 650,150 L 650,450 L 150,450 Z" />
-              <mask id="cornerMask">
-                <rect x="0" y="0" width="800" height="600" fill="white" />
-                <g fill="black" filter="url(#blurFilter)">
-                  <circle cx="150" cy="150" r="70" /> <circle cx="650" cy="150" r="70" /> 
-                  <circle cx="650" cy="450" r="70" /> <circle cx="150" cy="450" r="70" /> 
-                </g>
-                <filter id="blurFilter"><feGaussianBlur stdDeviation="15" /></filter>
-              </mask> 
-            </defs>
-            <use href="#path43" fill="none" stroke="#fff" stroke-width="1" />
-            <text fill="#fff" font-family="'LEMONMILK-Regular', 'Roboto', sans-serif" font-size="18" font-weight="bold" dy="-5" mask="url(#cornerMask)">
-              <textPath class="marquee-path" href="#path43" startOffset="0%">
-                where horsepower meets cinematic excellence • RoCars • where horsepower meets cinematic excellence • RoCars • where horsepower meets cinematic excellence • RoCars • where horsepower meets cinematic excellence • RoCars • where horsepower meets cinematic excellence • RoCars • 
-              </textPath>
-            </text>
-          </svg>
-      </div>
-      
-      <div class="sq-marquee-wrapper mobile-only">
-          <svg viewBox="0 0 600 800" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <path id="path34" d="M 100,100 L 500,100 L 500,700 L 100,700 Z" />
-              <mask id="cornerMaskMobile">
-                <rect x="0" y="0" width="600" height="800" fill="white" />
-                <g fill="black" filter="url(#blurFilterMobile)">
-                  <circle cx="100" cy="100" r="70" /> <circle cx="500" cy="100" r="70" /> 
-                  <circle cx="500" cy="700" r="70" /> <circle cx="100" cy="700" r="70" /> 
-                </g>
-                <filter id="blurFilterMobile"><feGaussianBlur stdDeviation="15" /></filter>
-              </mask> 
-            </defs>
-            <use href="#path34" fill="none" stroke="#fff" stroke-width="1" />
-            <text fill="#fff" font-family="'LEMONMILK-Regular', 'Roboto', sans-serif" font-size="28" font-weight="bold" dy="-10" mask="url(#cornerMaskMobile)">
-              <textPath class="marquee-path" href="#path34" startOffset="0%">
-                where horsepower meets cinematic excellence • RoCars • where horsepower meets cinematic excellence • RoCars • where horsepower meets cinematic excellence • RoCars • where horsepower meets cinematic excellence • RoCars • where horsepower meets cinematic excellence • RoCars • 
-              </textPath>
-            </text>
-          </svg>
-      </div>
-    
-      <div class="screen-view">
-        <div class="screen-video">
-          <video id="screen-video-wrapper" autoplay muted playsinline loop preload="auto" webkit-playsinline>
-            <source src="./assets/RoCars BG III.mp4" type="video/mp4" />
-          </video>
+      <div class="hero-bg">
+        <h1 class="hero-title htu">
+          RoCars
+        </h1>
+        <div class="hero-img">
+          <img src="./assets/roman.png">
+          <div class="marqueecontainerII">
+            <div class="marqueecontentII">
+              <span>RoCars •&nbsp;</span>
+              <span>where horsepower meets cinematic excellence •&nbsp;</span>
+              <span>RoCars •&nbsp;</span>
+              <span>supercars, classic legends & luxury automotive brands •&nbsp;</span>
+              <span>RoCars •&nbsp;</span>
+              <span>where horsepower meets cinematic excellence •&nbsp;</span>
+              <span>RoCars •&nbsp;</span>
+              <span>supercars, classic legends & luxury automotive brands •&nbsp;</span>
+            </div>
+          </div>
         </div>
-    
-        <div class="screen-marqueecontainer fade-sides">
-          <div class="screen-marqueecontent">
-            <span>•</span>
-            <span class="screen-RC">RoCars</span>
-            <span>•</span>
-            <span>where horsepower meets cinematic excellence</span>
-            <span>•</span>
-            <span class="screen-RC">RoCars</span>
-            <span>•</span>
-            <span>supercars, classic legends & luxury automotive brands</span>
-            <span>•</span>
-            <span class="screen-RC">RoCars</span>
-            <span>•</span>
-            <span>where horsepower meets cinematic excellence</span>
-            <span>•</span>
-            <span class="screen-RC">RoCars</span>
-            <span>•</span>
-            <span>supercars, classic legends & luxury automotive brands</span>
+        <h1 class="hero-title">
+          RoCars
+          <span class="hdr">Roman.</span>
+        </h1>
+        <div class="mini">Designed By elKaboos © 2026</div>
+      </div>
+    </section>
+    <!--
+    <section class="engine-section">
+          <div class="core-marquee fade-sides-pro">
+            <div class="coremarqueecontainer">
+              <div class="coremarqueecontent">
+                <span>•</span>
+                <span>IS DESIGNED AS A DIGITAL MACHINE WHERE CINEMATIC STORYTELLING, PERFORMANCE CULTURE AND FUTURISTIC DESIGN EXIST INSIDE THE SAME EXPERIENCE</span>
+                <span>•</span>
+                <span>IS DESIGNED AS A DIGITAL MACHINE WHERE CINEMATIC STORYTELLING, PERFORMANCE CULTURE AND FUTURISTIC DESIGN EXIST INSIDE THE SAME EXPERIENCE</span>
+                <span>•</span>
+                <span>IS DESIGNED AS A DIGITAL MACHINE WHERE CINEMATIC STORYTELLING, PERFORMANCE CULTURE AND FUTURISTIC DESIGN EXIST INSIDE THE SAME EXPERIENCE</span>
+                <span>•</span>
+                <span>IS DESIGNED AS A DIGITAL MACHINE WHERE CINEMATIC STORYTELLING, PERFORMANCE CULTURE AND FUTURISTIC DESIGN EXIST INSIDE THE SAME EXPERIENCE</span>
+                <span>•</span>
+                <span>IS DESIGNED AS A DIGITAL MACHINE WHERE CINEMATIC STORYTELLING, PERFORMANCE CULTURE AND FUTURISTIC DESIGN EXIST INSIDE THE SAME EXPERIENCE</span>
+                <span>•</span>
+                <span>IS DESIGNED AS A DIGITAL MACHINE WHERE CINEMATIC STORYTELLING, PERFORMANCE CULTURE AND FUTURISTIC DESIGN EXIST INSIDE THE SAME EXPERIENCE</span>
+                <span>•</span>
+                <span>IS DESIGNED AS A DIGITAL MACHINE WHERE CINEMATIC STORYTELLING, PERFORMANCE CULTURE AND FUTURISTIC DESIGN EXIST INSIDE THE SAME EXPERIENCE</span>
+                <span>•</span>
+                <span>IS DESIGNED AS A DIGITAL MACHINE WHERE CINEMATIC STORYTELLING, PERFORMANCE CULTURE AND FUTURISTIC DESIGN EXIST INSIDE THE SAME EXPERIENCE</span>
+              </div>
+            </div>
+          </div>
+          <div class="engine-title">RoCars</div>
+          <div class="engine-stats">
+            <div class="engine-stat">
+              <h3>4K</h3>
+              <span>CINEMATIC VISUALS</span>
+            </div>
+            <div class="engine-stat">
+              <h3>24/7</h3>
+              <span>AUTOMOTIVE CULTURE</span>
+            </div>
+            <div class="engine-stat">
+              <h3>∞</h3>
+              <span>HORSEPOWER ENERGY</span>
+            </div>
+          </div>
+    </section>
+    -->
+    <!-- SUBSYSTEM 05: PERFORMANCE TIMELINE -->
+    <section class="subsystem-stage sys-timeline" data-subsystem="05/MISSION_LOG">
+      <div class="timeline-spine">
+        <div class="timeline-progress-bar"></div>
+      </div>
+      
+      <div class="timeline-nodes-container">
+        <div class="timeline-block left" data-year="2018">
+          <div class="timeline-dot"></div>
+          <div class="log-tag">CHANNEL LAUNCHED</div>
+        </div>
+        <div class="timeline-block right" data-year="2018">
+          <div class="timeline-dot"></div>
+          <div class="log-tag">1M VIEWS</div>
+        </div>
+        <div class="timeline-block left" data-year="2019">
+          <div class="timeline-dot"></div>
+          <div class="log-tag">+10M VIEWS</div>
+        </div>
+        <div class="timeline-block right" data-year="2021">
+          <div class="timeline-dot"></div>
+          <div class="log-tag">+15M VIEWS On One Video</div>
+        </div>
+        <div class="timeline-block left" data-year="2026">
+          <div class="timeline-dot"></div>
+          <div class="log-tag">ROCARS PLATFORM</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="transmission-section">
+      <!--
+      <div class="transmission-header">
+        <span class="dot"></span>
+        <p>ROCARS ECOSYSTEM</p>
+      </div>
+      -->
+      <div class="transmission-grid">
+        <!-- VIDEOGRAPHY -->
+        <div class="trans-card">
+          <div class="trans-noise"></div>
+          <span class="trans-id">01 / VISUAL DIVISION</span>
+          <div class="cardmarqueecontainer">
+            <div class="cardmarqueecontent">
+              <span>•</span>
+              <span class="OR">Cinematic</span>
+              <span>•</span>
+              <span>Drive Films</span>
+              <span>•</span>
+              <span class="OR">Cinematic</span>
+              <span>•</span>
+              <span>Drive Films</span>
+              <span>•</span>
+              <span class="OR">Cinematic</span>
+              <span>•</span>
+              <span>Drive Films</span>
+              <span>•</span>
+              <span class="OR">Cinematic</span>
+              <span>•</span>
+              <span>Drive Films</span>
+            </div>
+          </div>
+          <div class="cardmarqueecontainerII">
+            <div class="cardmarqueecontentII">
+              <span>•</span>
+              <span>Rolling shots, Night runs, Engine emotion</span>
+              <span>•</span>
+              <span>Luxury automotive storytelling built like movie trailers</span>
+              <span>•</span>
+              <span>Rolling shots, Night runs, Engine emotion</span>
+              <span>•</span>
+              <span>Luxury automotive storytelling built like movie trailers</span>
+              <span>•</span>
+              <span>Rolling shots, Night runs, Engine emotion</span>
+              <span>•</span>
+              <span>Luxury automotive storytelling built like movie trailers</span>
+              <span>•</span>
+              <span>Rolling shots, Night runs, Engine emotion</span>
+              <span>•</span>
+              <span>Luxury automotive storytelling built like movie trailers</span>
+            </div>
+          </div>
+          <div class="trans-footer">
+            <span>4K PRODUCTION</span>
+            <span>MOTION DESIGN</span>
           </div>
         </div>
     
+        <!-- YOUTUBE -->
+        <div class="trans-card active">
+          <div class="trans-noise"></div>
+          <span class="trans-id">03 / BROADCAST DIVISION</span>
+          <div class="cardmarqueecontainer">
+            <div class="cardmarqueecontent">
+              <span>•</span>
+              <span class="OR">RoCars</span>
+              <span>•</span>
+              <span>TV</span>
+              <span>•</span>
+              <span class="OR">RoCars</span>
+              <span>•</span>
+              <span>TV</span>
+              <span>•</span>
+              <span class="OR">RoCars</span>
+              <span>•</span>
+              <span>TV</span>
+              <span>•</span>
+              <span class="OR">RoCars</span>
+              <span>•</span>
+              <span>TV</span>
+            </div>
+          </div>
+          <div class="cardmarqueecontainerII">
+            <div class="cardmarqueecontentII">
+              <span>•</span>
+              <span>Cinematic automotive content blending</span>
+              <span>•</span>
+              <span>horsepower, atmosphere, design, and adrenaline</span>
+              <span>•</span>
+              <span>Cinematic automotive content blending</span>
+              <span>•</span>
+              <span>horsepower, atmosphere, design, and adrenaline</span>
+              <span>•</span>
+              <span>Cinematic automotive content blending</span>
+              <span>•</span>
+              <span>horsepower, atmosphere, design, and adrenaline</span>
+              <span>•</span>
+              <span>Cinematic automotive content blending</span>
+              <span>•</span>
+              <span>horsepower, atmosphere, design, and adrenaline</span>
+            </div>
+          </div>
+          <div class="trans-footer">
+            <span>EDITORIAL CONTENT</span>
+            <span>GLOBAL AUDIENCE</span>
+          </div>
+        </div>
+
+        <!-- SELLING CARS -->
+        <div class="trans-card">
+          <div class="trans-noise"></div>
+          <span class="trans-id">02 / MACHINE DIVISION</span>
+          <div class="cardmarqueecontainer">
+            <div class="cardmarqueecontent">
+              <span>•</span>
+              <span class="OR">Exotic</span>
+              <span>•</span>
+              <span>Machines</span>
+              <span>•</span>
+              <span class="OR">Exotic</span>
+              <span>•</span>
+              <span>Machines</span>
+              <span>•</span>
+              <span class="OR">Exotic</span>
+              <span>•</span>
+              <span>Machines</span>
+              <span>•</span>
+              <span class="OR">Exotic</span>
+              <span>•</span>
+              <span>Machines</span>
+            </div>
+          </div>
+          <div class="cardmarqueecontainerII">
+            <div class="cardmarqueecontentII">
+              <span>•</span>
+              <span>Curated luxury vehicles for collectors</span>
+              <span>•</span>
+              <span>enthusiasts, and people obsessed with performance</span>
+              <span>•</span>
+              <span>Curated luxury vehicles for collectors</span>
+              <span>•</span>
+              <span>enthusiasts, and people obsessed with performance</span>
+              <span>•</span>
+              <span>Curated luxury vehicles for collectors</span>
+              <span>•</span>
+              <span>enthusiasts, and people obsessed with performance</span>
+              <span>•</span>
+              <span>Curated luxury vehicles for collectors</span>
+              <span>•</span>
+              <span>enthusiasts, and people obsessed with performance</span>
+            </div>
+          </div>
+          <div class="trans-footer">
+            <span>SUPERCARS</span>
+            <span>PRIVATE SALES</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBSYSTEM 07: CINEMATIC STATEMENT -->
+    <section class="subsystem-stage sys-statement" data-subsystem="07/EMOTION_STREAM">
+      <div class="statement-canvas">
+        
+        <div class="statement-frame" id="msg-1">
+          <h2>CARS ARE NOT<br>
+            <span class="strike-container">
+              <span class="outlined">TRANSPORTATION</span>
+              <span class="strike-line"></span>
+            </span>
+          </h2>
+        </div>
+        
+        <div class="statement-frame" id="msg-2">
+          <h2>THEY ARE<br>
+            <span class="strike-container">
+              <span class="outlined">Rolling Emotion</span>
+              <span class="strike-line"></span>
+            </span>
+          </h2>
+        </div>
+        
+        <div class="statement-frame" id="msg-3">
+          <h2>THEY ARE<br>
+            <span class="strike-container">
+              <span class="outlined">MEMORIES</span>
+              <span class="strike-line"></span>
+            </span>
+          </h2>
+        </div>
+        
+        <div class="statement-frame" id="msg-4">
+          <h2>THEY ARE<br>
+            <span class="strike-container">
+              <span class="accent">RoCars</span>
+              <span class="strike-line"></span>
+            </span>
+          </h2>
+        </div>
+        
+      </div>
+    </section>
+
+    <section class="quote-section">
+      <div class="quote-wrap">
+
+        <div class="references fade-sides">
+          <div class="track">
+            <div class="ref"><img src="./assets/brands/Aston-Martin.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/audi.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/bmw.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/cadillac.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/Chevrolet.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/ferrari.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/lamborghini.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/Land-Rover.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/maserati.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/McLaren.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/Mercedes-Benz.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/porsche.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/Rolls-Royce.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/subaru.webp"></img></div>
+            <div class="ref"><img src="./assets/brands/Volkswagen.webp"></img></div>
+          </div>
+        </div>
+        
+        <div class="quote-author">
+          <div class="quote-signa">
+            <div class="signaone">
+              <span class="hdr">RoCars</span>
+              <p class="square-paragraph">
+                ROCARS IS A CINEMATIC AUTOMOTIVE PLATFORM CREATED FOR PEOPLE WHO SEE CARS AS MORE THAN MACHINES. IT IS BUILT AROUND SPEED, LUXURY ENGINEERING, VISUAL STORYTELLING, DIGITAL CULTURE, AND THE PURE EMOTION OF DRIVING THROUGH LIGHT, SOUND, AND MOTION. EVERY EXPERIENCE IS DESIGNED TO FEEL IMMERSIVE, ATMOSPHERIC, AND UNFORGETTABLE, BLENDING THE ENERGY OF SUPERCARS WITH THE ART DIRECTION OF FUTURISTIC CINEMA. FROM MIDNIGHT HIGHWAY RUNS AND RAIN-SOAKED STREETS TO NEON REFLECTIONS, ENGINE VIBRATIONS, AND PRECISION DETAILING, ROCARS CAPTURES THE FEELING OF MOVEMENT IN ITS RAWEST FORM. EACH FRAME IS TREATED LIKE A FILM SCENE, WHERE PERFORMANCE, DESIGN, TECHNOLOGY, AND LUXURY EXIST TOGETHER INSIDE A WORLD BUILT FOR ENTHUSIASTS WHO APPRECIATE BOTH POWER AND AESTHETICS. THE PLATFORM EXPLORES EXCLUSIVE MACHINES, ICONIC DESIGNS, CUSTOM BUILDS, RACING INSPIRATION, AND THE CULTURE SURROUNDING MODERN AUTOMOTIVE LIFESTYLES. EVERYTHING, FROM THE VISUALS TO THE INTERACTIONS, IS CRAFTED TO CREATE A SENSE OF DEPTH, INTENSITY, AND MOTION, TURNING EVERY VISIT INTO A DIGITAL DRIVE THROUGH A FUTURISTIC AUTOMOTIVE UNIVERSE.
+              </p>
+            </div>
+            <div class="signathree">
+                <span class="ql"><a href="https://www.youtube.com/@RoCarsTV" target="_blank"><span class="menubg"></span>YouTube</a></span>
+                <span class="ql"><a href="https://www.instagram.com/rocarstv" target="_blank"><span class="menubg"></span>Instagram</a></span>
+                <span class="ql"><a href="https://www.tiktok.com/@b.rocars" target="_blank"><span class="menubg"></span>TikTok</a></span>
+            </div>
+          </div>
+          <div class="quote-code">
+            <video autoplay muted loop playsinline>
+              <source src="./assets/RoCars BG III.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
       </div>
 
-      <p class="subhdrII fade-in-out">S T A R T !</p> 
-      <span class="hdr">RoCars</span> 
-      <span class="subhdr">RoCars<br><span>&nbsp;ROMAN WITH CARS</span></span>
-      <img class="hdrII" src="./assets/RoCarsW.png"></img>
-    </div>
+    </section>
 
-    <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
-      <filter id="rocars-glitch-filter">
-        <feTurbulence type="fractalNoise" baseFrequency="0.00001" numOctaves="1" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </svg>
-    
-    <div class="glitch-container">
-      <div id="decorations-layer"></div> <h1 id="rocars-text" class="glitch-word">RoCars</h1>
-      <div id="glitch-chars"></div> </div>
-      <h1 id="rocars-text" class="glitch-word">RoCars</h1>
-    </div>
-
-    <svg style="display: none;">
+    <svg class="max-txt" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
       <defs>
-        <filter id="glitch-filter">
-          <feTurbulence type="fractalNoise" baseFrequency="0.00001" numOctaves="1" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+        <filter id="HoverDistort">
+          <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" stitchTiles="stitch" result="turb">
+            <animate attributeName="seed" from="2" to="50" dur="5s" repeatCount="indefinite" />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="turb" scale="10" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <filter id="HoverDistort-max">
+          <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" stitchTiles="stitch" result="turb">
+            <animate attributeName="seed" from="2" to="50" dur="5s" repeatCount="indefinite" />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="turb" scale="33" xChannelSelector="R" yChannelSelector="G" />
         </filter>
       </defs>
     </svg>
 
-    <div class="video-glitch-wrapper fade-center">
-      <video src="assets/videoplaybackII.mp4" autoplay loop muted></video>
-    </div>
-   
-  <svg class="max-txt" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
-    <defs>
-      <filter id="HoverDistort">
-        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" stitchTiles="stitch" result="turb">
-          <animate attributeName="seed" from="2" to="50" dur="5s" repeatCount="indefinite" />
-        </feTurbulence>
-        <feDisplacementMap in="SourceGraphic" in2="turb" scale="10" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-      <filter id="HoverDistort-max">
-        <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" seed="2" stitchTiles="stitch" result="turb">
-          <animate attributeName="seed" from="2" to="50" dur="5s" repeatCount="indefinite" />
-        </feTurbulence>
-        <feDisplacementMap in="SourceGraphic" in2="turb" scale="33" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </defs>
-  </svg>
-
-  <svg id="filters" style="display: none;">
-    <filter id="text-distortion" x="-20%" y="-20%" width="140%" height="140%">
-      <feTurbulence 
-          id="text-turbulence" 
-          type="fractalNoise" 
-          baseFrequency="0.01 0.05" 
-          numOctaves="1" 
-          seed="1" />
-      <feDisplacementMap 
-          in="SourceGraphic" 
-          scale="30" />
-    </filter>
-  </svg>
   
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script type="module" src="main.js" defer></script>
-  <script src="./menu.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" integrity="sha512-u3fPA7V8qQmhBPNT5quvaXVa1mnnLSXUep5PS1qo5NRzHwG19aHmNJnj1Q8hpA/nBWZtZD4r4AX6YOt5ynLN2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="js/script.js"></script>
-  <script src="js/index.cad48f07.js"></script>
-
-  <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-
-  <script>
-    function lockViewport() {
-      // Reset scroll position
-      window.scrollTo(0, 0);
-    
-      // Force body to exactly match viewport size
-      document.body.style.position = 'fixed';
-      document.body.style.top = '0';
-      document.body.style.left = '0';
-      document.body.style.width = window.innerWidth + 'px';
-      document.body.style.height = window.innerHeight + 'px';
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-      document.documentElement.style.width = '100%';
-      document.documentElement.style.height = '100%';
-    }
-    
-    // Apply immediately and on resize
-    lockViewport();
-    window.addEventListener('resize', lockViewport);
-  </script>
-
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script type="module" src="main.js" defer></script>
+    <script src="./menu.js"></script>
   
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" integrity="sha512-u3fPA7V8qQmhBPNT5quvaXVa1mnnLSXUep5PS1qo5NRzHwG19aHmNJnj1Q8hpA/nBWZtZD4r4AX6YOt5ynLN2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/script.js"></script>
+    <script src="js/index.cad48f07.js"></script>
+  
+    <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  </body>
 </html>

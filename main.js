@@ -52,7 +52,7 @@ window.addEventListener('load', () => {
     tl.to(".shutter-bottom", { yPercent: 102, duration: 1.5, ease: "expo.inOut" }, "<");
 
     // 4. The "Ignition" Reveal (Page Elements)
-    tl.set(".marqueecontainer, .logo-glitch-wrapper, .we, .tv-wrapper, .pulse-circles", { 
+    tl.set(".marqueecontainer, .logo-glitch-wrapper, .tv-wrapper, .pulse-circles", { 
         visibility: "visible" 
     });
 
@@ -67,49 +67,228 @@ window.addEventListener('load', () => {
     tl.fromTo(".tv-wrapper, .pulse-circles", 
         { y: 80, opacity: 0 }, 
         { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power4.out" }, "-=1.5");
+    
+    tl.to(".hero-img",{
+      opacity:1,
+      y:0,
+      scale:1,
+      rotate:0,
+      filter:"blur(0px)",
+      duration:2,
+      ease:"power4.out"
+    },"-=1.8");
+    
+    tl.fromTo(".marqueecontainerII", 
+        { x: 80, opacity: 0 }, 
+        { x: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power4.out" }, "-=1.5");
 
-    tl.to(".we", { opacity: 1, duration: 1.5 }, "-=1");
+    tl.to(".hero-title",{
+      opacity:1,
+      y:0,
+      scale:1,
+      filter:"blur(0px)",
+      duration:2.2
+    },"-=2");
+
+    tl.to(".htu",{
+      filter:"drop-shadow(0px 0px 5px #fff)",
+      duration:2.2
+    },"-=2");
+
+    tl.to(".hero-title span",{
+      y:0,
+      rotate:0,
+      duration:2,
+      stagger:.06,
+      ease:"expo.out"
+    },"-=2");
+
+    tl.to(".mini",{
+      opacity:1,
+      y:0,
+      duration:1.4,
+      stagger:.1
+    },"-=1.5");
+    
 
     // Clean up
     tl.set(".loading", { display: "none" });
 });
 
+// BG points -----------------------------------------------------------------
+const gridCanvas = document.getElementById("grid-bg");
+const ctx = gridCanvas.getContext("2d");
 
+// --- 1. Create a hidden noise buffer ---
+const noiseCanvas = document.createElement('canvas');
+const noiseCtx = noiseCanvas.getContext('2d');
+noiseCanvas.width = 100;
+noiseCanvas.height = 100;
 
-/* -- Glow effect -- */
-
-const blob = document.getElementById("blob");
-window.onpointermove = event => { 
-  const { clientX, clientY } = event;
- 
-  blob.animate({
-    left: `${clientX}px`,
-    top: `${clientY}px`
-  }, { duration: 3000, fill: "forwards" });
+function createNoise() {
+    const imageData = noiseCtx.createImageData(100, 100);
+    const data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+        const val = Math.random() * 255;
+        data[i] = data[i+1] = data[i+2] = val; // RGB
+        data[i+3] = 25; // Opacity of the grain (keep it low!)
+    }
+    noiseCtx.putImageData(imageData, 0, 0);
 }
-// JS to force remove scroll
-document.body.style.overflow = 'hidden';
-document.documentElement.style.overflow = 'hidden';
+createNoise();
 
- 
-// SVG turbulence animation
-const turbulencemax = document.getElementById("text-turbulence-max");
-const turbulence = document.getElementById("text-turbulence");
+let time = 0;
 
-let svgFrame = 0;
-let lastSVGTime = 0;
+function resize() {
+    gridCanvas.width = window.innerWidth;
+    gridCanvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
 
-function animateSVGFilter(time) {
-  if (time - lastSVGTime > 100) {
-    svgFrame += 0.02;
-    const freq = 0.05 + Math.sin(svgFrame) * 0.01;
-    turbulencemax?.setAttribute("baseFrequency", freq);
-    turbulence?.setAttribute("baseFrequency", freq);
-    lastSVGTime = time;
+function draw() {
+    time += 0.005;
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
+
+    // 2. Draw the Gradient
+    const centerX = gridCanvas.width / 2 + Math.cos(time) * (gridCanvas.width * 0.3);
+    const centerY = gridCanvas.height / 2 + Math.sin(time * 0.8) * (gridCanvas.height * 0.2);
+    const baseRadius = Math.max(gridCanvas.width, gridCanvas.height) * 5;
+    const pulseRadius = baseRadius + Math.sin(time * 0.5) * 100;
+
+    const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, pulseRadius);
+    gradient.addColorStop(0, "#000"); 
+    gradient.addColorStop(1, "#ffa666");
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, gridCanvas.width, gridCanvas.height);
+    /*
+    // 3. Layer the Noise on top
+    // We use 'source-over' or 'overlay' to blend the grain
+    ctx.globalCompositeOperation = "source-over"; 
+    
+    // To animate the noise, we draw the small noise tile at random offsets
+    const noiseOffsetX = Math.random() * noiseCanvas.width;
+    const noiseOffsetY = Math.random() * noiseCanvas.height;
+
+    // Create a pattern from the noise tile
+    const pattern = ctx.createPattern(noiseCanvas, 'repeat');
+    ctx.save();
+    ctx.translate(noiseOffsetX, noiseOffsetY); // Shifts noise every frame
+    ctx.fillStyle = pattern;
+    ctx.fillRect(-noiseOffsetX, -noiseOffsetY, gridCanvas.width, gridCanvas.height);
+    ctx.restore();
+    */
+    requestAnimationFrame(draw);
+}
+
+draw();
+
+
+// HEADER
+document.addEventListener("DOMContentLoaded", () => {
+
+  function continuousFlicker(el) {
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: Math.random() * 1 });
+
+    tl.to(el, {
+      opacity: 0.25,
+      duration: 0.04,
+      ease: "none"
+    })
+    .to(el, {
+      opacity: 1,
+      duration: 0.12,
+      ease: "power2.out"
+    })
+    // tiny micro-flickers
+    .to(el, {
+      opacity: 0.8,
+      duration: 0.03,
+      ease: "none"
+    })
+    .to(el, {
+      opacity: 1,
+      duration: 0.05,
+      ease: "none"
+    })
+    // medium dip
+    .to(el, {
+      opacity: 0.4,
+      duration: 0.07,
+      ease: "none",
+      delay: Math.random() * 0.3
+    })
+    .to(el, {
+      opacity: 1,
+      duration: 0.18,
+      ease: "power4.out",
+      delay: Math.random() * 0.4
+    })
+    // strong ignition pop
+    .to(el, {
+      opacity: 1,
+      duration: 0.05,
+      ease: "power1.inOut"
+    })
+    .to(el, {
+      duration: 0.2,
+      ease: "power1.out"
+    });
+
+    return tl;
   }
-  requestAnimationFrame(animateSVGFilter);
-}
-animateSVGFilter();
+
+  // 🔥 Apply to ALL hdr + subhdr in every .we container
+  document.querySelectorAll(".hdr").forEach(el => continuousFlicker(el));
+  document.querySelectorAll(".subhdr").forEach(el => continuousFlicker(el));
+  
+});
+
+/* =========================================================
+   LIVE MOUSE DEPTH
+========================================================= */
+
+window.addEventListener("mousemove",(e)=>{
+
+  const x = (e.clientX / window.innerWidth - .5);
+  const y = (e.clientY / window.innerHeight - .5);
+
+  gsap.to(".hero-img",{
+    x:x * 40,
+    y:y * 25,
+    rotate:y * 6,
+    duration:2,
+    ease:"power3.out"
+  });
+
+  gsap.to(".hero-title",{
+    x:x * 20,
+    y:y * 10,
+    duration:2.5,
+    ease:"power3.out"
+  });
+
+});
+
+gsap.registerPlugin(ScrollTrigger);
+
+const quoteTl = gsap.timeline({
+  scrollTrigger:{
+    trigger:".quote-section",
+    start:"top 70%",
+  }
+});
+
+quoteTl.to(".quote-text",{
+  y:"0%",
+  opacity:1,
+  duration:1.6,
+  stagger:0.18,
+  ease:"expo.out"
+});
 
 // Logo magnet + animation
 const logo = document.querySelector('.logo-glitch-wrapper');
@@ -157,41 +336,65 @@ logo.addEventListener('touchend', resetLogoMagnet);
 logo.addEventListener('touchcancel', resetLogoMagnet);
 
 
-window.addEventListener('load', () => {
+// ======================= MARQUEES ============================== //
+
+window.addEventListener("load", () => {
   // 1. Existing Loading Logic
-  document.body.classList.remove('before-load');
-  
+  document.body.classList.remove("before-load");
+
   // 2. Marquee Initialization
-  const initMarquee = (selector, duration = 60) => {
-    const wrapper = document.querySelector(selector);
-    if (!wrapper) return;
-  
+  const initMarquee = (element, duration = 60) => {
+    if (!element) return;
+
     // Clone the items to ensure the screen is full
-    const items = wrapper.innerHTML;
-    wrapper.innerHTML = items + items + items; 
-  
+    const items = element.innerHTML;
+    element.innerHTML = items + items + items;
+
     // Calculate the width of ONE set of items
-    const scrollWidth = wrapper.scrollWidth / 3;
-  
-    gsap.to(wrapper, {
+    const scrollWidth = element.scrollWidth / 3;
+
+    gsap.to(element, {
       x: -scrollWidth,
       duration: duration,
       ease: "none",
       repeat: -1,
       modifiers: {
-        x: gsap.utils.unitize(x => parseFloat(x) % scrollWidth)
+        x: gsap.utils.unitize(
+          (x) => parseFloat(x) % scrollWidth
+        )
       }
     });
   };
-  
-  // Initialize both marquees
-  initMarquee(".screen-marqueecontent");
-  initMarquee(".marqueecontent");
-  initMarquee(".marqueecontentII", 45); // You can even give them different speeds!
+
+  // Trigger ALL .cardmarqueecontent
+  document.querySelectorAll(".cardmarqueecontent").forEach((el) => {
+    initMarquee(el);
+  });
+
+  document.querySelectorAll(".cardmarqueecontentII").forEach((el) => {
+    initMarquee(el);
+  });
+  /*
+  document.querySelectorAll(".coremarqueecontent").forEach((el) => {
+    initMarquee(el, 360);
+  });
+  */
+  document.querySelectorAll(".quotemarqueecontent").forEach((el) => {
+    initMarquee(el);
+  });
+
+  // Other marquees
+  document.querySelectorAll(".marqueecontent").forEach((el) => {
+    initMarquee(el);
+  });
+
+  document.querySelectorAll(".marqueecontentII").forEach((el) => {
+    initMarquee(el, 45);
+  });
 });
 
-// ========== VIDEO FORCE PLAY ========== //
 
+// ========== VIDEO FORCE PLAY ========== //
 document.addEventListener("DOMContentLoaded", () => {
   const videos = document.querySelectorAll("video");
 
@@ -205,86 +408,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
   });
 });
-
-// ========== SQUARED MARQUEE ========== //
-
-// Target all text paths
-const allMarquees = document.querySelectorAll(".marquee-path");
-
-allMarquees.forEach(path => {
-    // Repeat text to fill the square
-    const text = path.textContent;
-    path.textContent = (text + " ").repeat(4);
-
-    gsap.to(path, {
-        attr: { startOffset: "-100%" },
-        duration: 30, // Slowed down for luxury feel
-        repeat: -1,
-        ease: "none"
-    });
-});
-
-// ========== SCREEN VIEW ========== //
-
-const screenElement = document.querySelector('.screen-view');
-const dtls = document.querySelector('.triangle-up');
-
-function hyperMotion3D() {
-  const isSpinning = Math.random() > 0.8; 
-  
-  const randomX = (Math.random() - 0.5) * 100;   
-  const randomY = (Math.random() - 0.5) * 80;   
-  const randomZ = isSpinning ? 120 : (Math.random() * 40); 
-  
-  const rotX = (Math.random() - 0.5) * 30; 
-  const rotY = (Math.random() - 0.5) * 30; 
-  
-  // FIX: Use relative rotation so it never "unwinds"
-  const rotZ = isSpinning ? (Math.random() > 0.5 ? "+=360" : "-=360") : (Math.random() - 0.5) * 20;
-
-  gsap.to(screenElement, {
-    duration: isSpinning ? 1.0 : 1.5,
-    xPercent: -50,
-    yPercent: -50,
-    x: randomX,
-    y: randomY,
-    z: randomZ,
-    rotationX: rotX,
-    rotationY: rotY,
-    rotationZ: rotZ, // Moves from current position forward
-    transformPerspective: 1200,
-    // force3D: true, Forces hardware acceleration
-    ease: "expo.inOut",
-    onComplete: () => {
-        // After a big spin, we normalize the value to keep numbers small 
-        // without the user seeing a jump.
-        if (isSpinning) {
-            const currentRot = gsap.getProperty(screenElement, "rotationZ");
-            gsap.set(screenElement, { rotationZ: currentRot % 360 });
-        }
-        hyperMotion3D();
-    }
-  });
-}
-
-hyperMotion3D();
-
-// ========== TURBULENCE ========== //
-
-  const textTurbulence = document.querySelector('#text-turbulence');
-  let distortionFrame = 0;
-
-  function animateTextDistortion() {
-    distortionFrame += 0.01;
-    const freqX = 0.015 + Math.sin(distortionFrame) * 0.005;
-    const freqY = 0.02 + Math.cos(distortionFrame) * 0.005;
-
-    textTurbulence.setAttribute('baseFrequency', `${freqX} ${freqY}`);
-    requestAnimationFrame(animateTextDistortion);
-  }
-
-  // Start immediately
-  animateTextDistortion();
 
 // ========== TV window magnet ========== //
 const tv = document.getElementById('window');
@@ -311,8 +434,6 @@ tv.addEventListener('touchmove', (e) => applyTVMagnet(e.touches[0].clientX, e.to
 tv.addEventListener('touchend', resetTVMagnet);
 tv.addEventListener('touchcancel', resetTVMagnet);
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const videos = document.querySelectorAll("video");
 
@@ -321,5 +442,157 @@ document.addEventListener("DOMContentLoaded", () => {
       vid.muted = true; // force mute if needed
       vid.play().catch(() => {});
     });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Register engine expansion plugins
+  gsap.registerPlugin(ScrollTrigger);
+
+  initTimelineSubsystem();
+  initCinematicStream();
+});
+
+/**
+ * Real-time Cursor Coordinates tracking globally mapped to CSS
+ */
+function initCoreIllumination() {
+  window.addEventListener("mousemove", (e) => {
+    const xPct = (e.clientX / window.innerWidth) * 100;
+    const yPct = (e.clientY / window.innerHeight) * 100;
+    
+    document.body.style.setProperty("--mx", `${xPct}%`);
+    document.body.style.setProperty("--my", `${yPct}%`);
+  });
+}
+/**
+ * Subsystem 05: Central Spine Mission Log Tracking Progress
+ */
+function initTimelineSubsystem() {
+  // 1. Spine Progress Bar Animation
+  gsap.to(".timeline-progress-bar", {
+    height: "100%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".timeline-nodes-container", // Trigger based on container boundaries
+      start: "top center",
+      end: "bottom center",
+      scrub: true
+    }
+  });
+
+  // 2. Individual Node Revealing and State Toggling
+  document.querySelectorAll(".timeline-block").forEach((node) => {
+    gsap.from(node, {
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      scrollTrigger: {
+        trigger: node,
+        start: "top 75%",
+        toggleActions: "play none none reverse"
+      }
+    });
+
+    // Lights up the dot and year background right when the line hits it
+    ScrollTrigger.create({
+      trigger: node,
+      start: "top center",
+      end: "bottom center",
+      toggleClass: { targets: node, className: "is-active" },
+      once: false
+    });
+  });
+}
+
+/**
+ * Subsystem 07: Deep Section Sequence Shift
+ */
+function initCinematicStream() {
+  const panels = gsap.utils.toArray(".statement-frame");
+  
+  const masterTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".sys-statement",
+      start: "top top",
+      end: () => `+=${panels.length * 800}`, 
+      pin: true,
+      scrub: 1,
+      anticipatePin: 1 
+    }
+  });
+
+  panels.forEach((panel, i) => {
+    // 1. Grab the line specifically for this panel
+    const line = panel.querySelector('.strike-line');
+
+    if (i === 0) {
+      // First panel starts visible, just animate the line, then fade out
+      if (line) {
+        masterTimeline.to(line, { scaleX: 1, duration: 0.8, ease: "power2.out" }, "+=0.2");
+      }
+      masterTimeline.to(panel, { 
+        autoAlpha: 0, scale: 1.15, filter: "blur(12px)", duration: 1, ease: "power2.in"
+      }, "+=0.4"); 
+      
+    } else {
+      // Subsequent panels: Fade in, strike through, fade out (if not the last one)
+      masterTimeline.to(panel, {
+        autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 1, ease: "power2.out"
+      });
+      
+      // Animate the line for this specific panel after it fades in
+      if (line) {
+        masterTimeline.to(line, { scaleX: 1, duration: 0.8, ease: "power2.out" }, "+=0.2");
+      }
+      
+      // Only fade out if it's not the final panel
+      if (i < panels.length - 1) {
+        masterTimeline.to(panel, { 
+          autoAlpha: 0, scale: 1.15, filter: "blur(12px)", duration: 1, ease: "power2.in"
+        }, "+=0.4"); 
+      }
+    }
+  });
+}
+
+/** ========== BRANDS MARQUEE ========== **/
+
+const track = document.querySelector(".track");
+
+// duplicate for seamless loop
+track.innerHTML += track.innerHTML;
+
+const distance = track.scrollWidth / 2;
+
+// main animation
+const tween = gsap.to(track, {
+  x: -distance,
+  duration: 60,
+  ease: "none",
+  repeat: -1
+});
+
+// smooth hover pause/resume (no snapping)
+const speed = { value: 1 };
+
+gsap.ticker.add(() => {
+  tween.timeScale(speed.value);
+});
+
+// hover interactions
+track.addEventListener("mouseenter", () => {
+  gsap.to(speed, {
+    value: 0,
+    duration: 0.8,
+    ease: "power3.out"
+  });
+});
+
+track.addEventListener("mouseleave", () => {
+  gsap.to(speed, {
+    value: 1,
+    duration: 1.2,
+    ease: "power3.out"
   });
 });
