@@ -251,26 +251,39 @@ document.addEventListener("DOMContentLoaded", () => {
    LIVE MOUSE DEPTH
 ========================================================= */
 
-window.addEventListener("mousemove",(e)=>{
+window.addEventListener("mousemove", (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5);
+  const y = (e.clientY / window.innerHeight - 0.5);
 
-  const x = (e.clientX / window.innerWidth - .5);
-  const y = (e.clientY / window.innerHeight - .5);
-
-  gsap.to(".hero-img",{
-    x:x * 40,
-    y:y * 25,
-    rotate:y * 6,
-    duration:2,
-    ease:"power3.out"
+  // Hero Image
+  gsap.to(".hero-img", {
+    xPercent: -50,
+    x: x * 40,
+    y: y * 25,
+    rotate: y * 6,
+    duration: 2,
+    ease: "power3.out"
   });
 
-  gsap.to(".hero-title",{
-    x:x * 20,
-    y:y * 10,
-    duration:2.5,
-    ease:"power3.out"
+  // Hero Title (Main Container)
+  gsap.to(".hero-title", {
+    xPercent: -50,
+    yPercent: -50,
+    x: x * 20,
+    y: y * 10,
+    duration: 2.5,
+    ease: "power3.out"
   });
 
+  // Hero Title Span (The Highlighted Text)
+  gsap.to(".hero-title span", {
+    xPercent: -50,
+    yPercent: -50,
+    x: x * 20,
+    y: y * 10,
+    duration: 2.5,
+    ease: "power3.out"
+  });
 });
 
 gsap.registerPlugin(ScrollTrigger);
